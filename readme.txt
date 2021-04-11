@@ -16,9 +16,8 @@ Integration of Shepherd.js (https://shepherdjs.dev/) for WordPress.
 == Description ==
 Simple Tour Guide is a step-by-step user guide based on Shepherd.js that lets you create an interactive guided tour for your visitors. 
 The plugin provides a great, neat and fast way to indroduce users to your product or service - by guiding them visually to different elements on your app. 
-An interactive walktrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepperd.js - a popular open-source lightweight vanilla js library for guided tours. 
+An interactive walktrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepperd.js - an open-source lightweight vanilla js library for guided tours. 
 Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
-No need to write even a line of custom code. Of course, if you want, feel free to customize it the way it will work best for you.
 
 == Installation ==
 1. Take the easy route and install through the WordPress plugin installer or download the .zip file and upload the unzipped folder to the `/wp-content/plugins/` directory
