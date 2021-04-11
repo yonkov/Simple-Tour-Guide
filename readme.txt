@@ -1,7 +1,7 @@
 === Simple Tour Guide ===
 Contributors: nravota12
 Plugin Name: Simple Tour Guide
-Plugin URI: https://github.com/yonkov/
+Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
 Tags: walktrough, product tour, guided tour, shepherd
 Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
