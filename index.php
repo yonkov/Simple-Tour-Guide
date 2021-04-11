@@ -299,14 +299,14 @@ add_action( 'wp_head', 'simple_tour_guide_custom_styles' );
 
 /**
  *
- * shim for php < 5.4
+ * shim for wordpress < 4.6
  * hex color sanitization function
  *
- * @link https://github.com/picocodes/ajax-live-search/issues/1
+ * @link https://developer.wordpress.org/reference/functions/sanitize_hex_color
  */
 
 if ( ! function_exists( 'sanitize_hex_color' ) ) {
-	function sanitize_hex_color( $color ) { // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedFunctionFound
+	function sanitize_hex_color( $color ) {
 		if ( '' === $color ) {
 			return '';
 		}
