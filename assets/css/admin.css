@@ -1,0 +1,35 @@
+.stg-buttons .button-secondary {
+    min-width: 10em;
+    text-indent: .5em;
+}
+.stg-buttons .dashicons {
+    position: relative;
+    top: .3em;
+}
+.stg-buttons .dashicons-no {
+    color: #aa0000;
+    left: 2em;
+}
+.stg-buttons .dashicons-yes-alt {
+    color: #157f1f;
+    left: 2em;
+}
+.stg-buttons td {
+    margin: 1.5em 0 0.5em;
+}
+.stg-table .form-field {
+    width: 100%;
+}
+.step {
+    border-bottom: 25px solid transparent;
+}
+@media (min-width:80em){
+    .stg-table .form-field {
+        width: 60%;
+    }
+}
+@media (min-width:100em){
+    .stg-table .form-field {
+        width: 40%;
+    }
+}
