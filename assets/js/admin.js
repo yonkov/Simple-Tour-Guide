@@ -55,9 +55,11 @@
     }
 
     //clean up storage on form submit for a smoother user experience
-    document.getElementsByClassName('stg-form')[0].onsubmit = function onSubmit() {
-        localStorage.removeItem('tour-guide');
-    };
+    if (document.getElementsByClassName('stg-form').length>0){
+        document.getElementsByClassName('stg-form')[0].onsubmit = function onSubmit() {
+            localStorage.removeItem('tour-guide');
+        };
+    }
 
     //increment counter
     jQuery('#stg_steps').click(function(e){

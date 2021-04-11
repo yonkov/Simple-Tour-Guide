@@ -1,4 +1,4 @@
-<form method="post" action="options.php">
+<form class="stg-form" method="post" action="options.php">
 	<?php settings_fields( 'simple_tour_guide_color_fields' ); ?>
 	<?php $btn_bgr_color = get_option( 'stg_btn_color', '#3288e6' ); ?>
 	<h3><?php _e( 'Button background color', 'simple-tour-guide' ); ?></h3>
