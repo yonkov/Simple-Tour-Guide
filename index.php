@@ -41,9 +41,8 @@ function simple_tour_guide_scripts_and_styles() {
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ) , '1.0.0', true );
-	}
-	else { //Fallback for wp < 5.0
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.0', true );
+	} else { // Fallback for wp < 5.0
 		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.0', true );
 	}
 	// pass plugin options
@@ -153,8 +152,9 @@ add_action( 'admin_menu', 'simple_tour_guide_settings_page' );
  *
  */
 function simple_tour_guide_setup_sections() {
-	$steps   = simple_tour_guide_get_steps_count();
-	$options = array();
+	$steps         = simple_tour_guide_get_steps_count();
+	$options       = array();
+	$btn_bgr_color = esc_attr( get_option( 'stg_btn_color', '#3288e6' ) );
 	for ( $step = 1; $step <= $steps; $step++ ) {
 
 		$title       = 'title_' . $step;
@@ -173,7 +173,7 @@ function simple_tour_guide_setup_sections() {
 
 	}
 
-	add_option( 'stg_tour', $tour_options );
+	add_option( 'stg_tour', $tour_options ); // default tour
 	register_setting( 'simple_tour_guide_fields', 'stg_tour' );
 
 	$general_options = array(
@@ -181,17 +181,14 @@ function simple_tour_guide_setup_sections() {
 		'show_confirmation' => '',
 		'show_on_all_pages' => true,
 	);
-	add_option( 'stg_settings', $general_options );
+	add_option( 'stg_settings', $general_options ); // default settings
 	register_setting( 'simple_tour_guide_additional_fields', 'stg_settings' );
 
-	add_option( 'stg_btn_color' );
+	add_option( 'stg_btn_color', $btn_bgr_color );
 	register_setting(
 		'simple_tour_guide_color_fields',
 		'stg_btn_color',
-		array(
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_hex_color',
-		)
+		'sanitize_hex_color'
 	);
 }
 
@@ -299,3 +296,23 @@ function simple_tour_guide_custom_styles() {
 	endif;
 }
 add_action( 'wp_head', 'simple_tour_guide_custom_styles' );
+
+/**
+ *
+ * shim for php < 5.4
+ * hex color sanitization function
+ *
+ * @link https://github.com/picocodes/ajax-live-search/issues/1
+ */
+
+if ( ! function_exists( 'sanitize_hex_color' ) ) {
+	function sanitize_hex_color( $color ) { // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedFunctionFound
+		if ( '' === $color ) {
+			return '';
+		}
+		// 3 or 6 hex digits, or the empty string.
+		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+			return $color;
+		}
+	}
+}
