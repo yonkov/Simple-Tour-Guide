@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Simple Tour Guide
- * Plugin URI: https://github.com/yonkov/#
+ * Plugin URI: https://github.com/yonkov/Post-Order-By-Category
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides a great, neat and fast way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin.
  * Version: 1.0.0
  * Author: Atanas Yonkov
