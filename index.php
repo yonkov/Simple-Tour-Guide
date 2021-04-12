@@ -149,6 +149,19 @@ function simple_tour_guide_page_content_callback() {
 
 add_action( 'admin_menu', 'simple_tour_guide_settings_page' );
 
+/**
+ * Add Settings link in WordPress Plugins Page
+ */
+
+function simple_tour_guide_settings_link( array $links ) {
+	$url           = get_admin_url() . 'options-general.php?page=simple_tour_guide';
+	$settings_link = '<a href="' . $url . '">' . __( 'Settings', 'simple-tour-guide' ) . '</a>';
+	  $links[]     = $settings_link;
+	return $links;
+}
+
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'simple_tour_guide_settings_link' );
+
 /*
  * Save Tour Steps in an array of steps
  *
@@ -175,10 +188,10 @@ function simple_tour_guide_setup_sections() {
 	}
 
 	add_option( 'stg_tour', $tour_options ); // default tour
-	register_setting( 
-		'simple_tour_guide_fields', 
-		'stg_tour', 
-		'simple_tour_guide_sanitize' 
+	register_setting(
+		'simple_tour_guide_fields',
+		'stg_tour',
+		'simple_tour_guide_sanitize'
 	);
 
 	$general_options = array(
