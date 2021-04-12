@@ -158,7 +158,7 @@ function simple_tour_guide_settings_link( array $links ) {
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'simple_tour_guide_settings_link' );
 
 /*
- * Save Tour Steps in an array of steps
+ * Save Tour Steps in an array of steps. Save tour settings and styles.
  *
  */
 function simple_tour_guide_setup_sections() {
@@ -371,7 +371,7 @@ function simple_tour_guide_custom_styles() {
 		?>
 		 <style>
 		.progress-bar span{
-			background-color: <?php echo esc_attr( $progress_bar_color ); ?> !important;
+			background-color: <?php echo esc_attr( $progress_bar_color ); ?>;
 		}
 		 </style>
 		<?php
