@@ -121,9 +121,6 @@
 }
 .shepherd-cancel-icon {
     background: 0 0;
-    background-color: transparent !important;
-    border: none;
-    color: hsla(0, 0%, 50.2%, 0.75) !important;
     font-size: 2em;
     cursor: pointer;
     font-weight: 400;

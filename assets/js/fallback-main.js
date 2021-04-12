@@ -42,7 +42,24 @@
             cancelIcon: {
                 enabled: true,
             },
-            useModalOverlay: true
+            useModalOverlay: true,
+            when: {
+                show: function() {
+                    const currentStepElement = tour.currentStep.el;
+                    const header = currentStepElement.querySelector('.shepherd-footer');
+                    const progress = document.createElement('div');
+                    const innerBar = document.createElement('span');
+                    const progressPercentage = ((tour.steps.indexOf(tour.currentStep) + 1)/tour.steps.length)*100 + '%';
+                    progress.className='progress-bar';
+                    innerBar.style.width=progressPercentage;
+                    // if only one button
+                    if (document.getElementsByClassName('shepherd-button').length==1) {
+                        progress.style.minWidth = '260px';
+                    }
+                    progress.appendChild(innerBar);
+                    header.insertBefore(progress, currentStepElement.querySelector('.shepherd-button'));
+                }
+            }
         },
         confirmCancel: isConfirmCancel,
     });

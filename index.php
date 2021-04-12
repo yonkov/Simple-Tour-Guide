@@ -39,6 +39,8 @@ function simple_tour_guide_scripts_and_styles() {
 	// Shepherd scripts and styles
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
+	// Plugin Options style
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.0' );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
 		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.0', true );
@@ -152,9 +154,8 @@ add_action( 'admin_menu', 'simple_tour_guide_settings_page' );
  *
  */
 function simple_tour_guide_setup_sections() {
-	$steps         = simple_tour_guide_get_steps_count();
-	$options       = array();
-	$btn_bgr_color = esc_attr( get_option( 'stg_btn_color', '#3288e6' ) );
+	$steps   = simple_tour_guide_get_steps_count();
+	$options = array();
 	for ( $step = 1; $step <= $steps; $step++ ) {
 
 		$title       = 'title_' . $step;
@@ -174,21 +175,35 @@ function simple_tour_guide_setup_sections() {
 	}
 
 	add_option( 'stg_tour', $tour_options ); // default tour
-	register_setting( 'simple_tour_guide_fields', 'stg_tour' );
+	register_setting( 
+		'simple_tour_guide_fields', 
+		'stg_tour', 
+		'simple_tour_guide_sanitize' 
+	);
 
 	$general_options = array(
 		'show_intro'        => true,
 		'show_confirmation' => '',
 		'show_on_all_pages' => true,
+		'show_progress'     => true,
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
-	register_setting( 'simple_tour_guide_additional_fields', 'stg_settings' );
+	register_setting(
+		'simple_tour_guide_additional_fields',
+		'stg_settings',
+		'simple_tour_guide_sanitize'
+	);
 
-	add_option( 'stg_btn_color', $btn_bgr_color );
+	$color_options = array(
+		'btn_color'      => '#3288e6',
+		'progress_color' => '#3288e6',
+	);
+
+	add_option( 'stg_colors', $color_options ); // default colors
 	register_setting(
 		'simple_tour_guide_color_fields',
-		'stg_btn_color',
-		'sanitize_hex_color'
+		'stg_colors',
+		'simple_tour_guide_sanitize'
 	);
 }
 
@@ -203,7 +218,7 @@ function simple_tour_guide_increment_counter() {
 	// Check if the option is set already
 	if ( get_option( $option_name ) !== false ) {
 		$new_value = intval( get_option( $option_name ) ) + 1;
-		// The option already exists, so update it.
+		// sanitize and update the option
 		update_option( $option_name, absint( $new_value ) );
 	} else {
 		// The option hasn't been created yet, so add it with $autoload set to 'no'.
@@ -211,6 +226,7 @@ function simple_tour_guide_increment_counter() {
 		$autoload   = 'no';
 		add_option( $option_name, 2, $deprecated, $autoload );
 	}
+	return $options;
 }
 
 add_action( 'wp_ajax_increment_counter', 'simple_tour_guide_increment_counter' );
@@ -226,7 +242,7 @@ function simple_tour_guide_decrement_counter() {
 	// Decrement the option if is set and bigger that one
 	if ( get_option( $option_name ) !== false && get_option( $option_name ) > 1 ) {
 		$new_value = intval( get_option( $option_name ) ) - 1;
-		// The option already exists, so update it.
+		// sanitize and update the option
 		update_option( $option_name, absint( $new_value ) );
 	}
 
@@ -281,10 +297,59 @@ function simple_tour_guide_demo_shortcode() {
 add_shortcode( 'stg_kef', 'simple_tour_guide_demo_shortcode' );
 
 /**
+ * Sanitization callback
+ */
+function simple_tour_guide_sanitize( $options ) {
+	$steps = simple_tour_guide_get_steps_count();
+	// Checkboxes
+	if ( ! empty( $options['show_intro'] ) ) {
+		$options['show_intro'] = 'true';
+	}
+
+	if ( ! empty( $options['show_confirmation'] ) ) {
+		$options['show_confirmation'] = 'true';
+	}
+
+	if ( ! empty( $options['show_on_all_pages'] ) ) {
+		$options['show_on_all_pages'] = 'true';
+	}
+
+	if ( ! empty( $options['show_progress'] ) ) {
+		$options['show_progress'] = 'true';
+	}
+	// text input
+	for ( $step = 1; $step <= $steps; $step++ ) {
+		if ( ! empty( $options[ 'title_' . $step ] ) ) {
+			$options[ 'title_' . $step ] = sanitize_text_field( $options[ 'title_' . $step ] );
+		}
+		if ( ! empty( $options[ 'description_' . $step ] ) ) {
+			$options[ 'description_' . $step ] = sanitize_text_field( $options[ 'description_' . $step ] );
+		}
+		if ( ! empty( $options[ 'location_' . $step ] ) ) {
+			$options[ 'location_' . $step ] = sanitize_text_field( $options[ 'location_' . $step ] );
+		}
+		if ( ! empty( $options[ 'classname_' . $step ] ) ) {
+			$options[ 'classname_' . $step ] = sanitize_text_field( $options[ 'classname_' . $step ] );
+		}
+	}
+	// Colors
+	if ( ! empty( $options['btn_color'] ) ) {
+		$options['input_example'] = sanitize_hex_color( $options['btn_color'] );
+	}
+	if ( ! empty( $options['progress_color'] ) ) {
+		$options['progress_color'] = sanitize_hex_color( $options['progress_color'] );
+	}
+
+	return $options;
+}
+
+/**
  * Add color styling from the plugin
  */
 function simple_tour_guide_custom_styles() {
-	$btn_bgr_color = get_option( 'stg_btn_color', '#3288e6' );
+	$colors             = get_option( 'stg_colors' );
+	$btn_bgr_color      = $colors['btn_color'];
+	$progress_bar_color = $colors['progress_color'];
 	if ( ! empty( $btn_bgr_color ) ) :
 		?>
 		 <style>
@@ -294,12 +359,21 @@ function simple_tour_guide_custom_styles() {
 		 </style>
 		<?php
 	endif;
+	if ( ! empty( $btn_bgr_color ) ) :
+		?>
+		 <style>
+		.progress-bar span{
+			background-color: <?php echo esc_attr( $progress_bar_color ); ?> !important;
+		}
+		 </style>
+		<?php
+	endif;
 }
 add_action( 'wp_head', 'simple_tour_guide_custom_styles' );
 
 /**
  *
- * shim for wordpress < 4.6
+ * shim for WordPress < 4.6
  * hex color sanitization function
  *
  * @link https://developer.wordpress.org/reference/functions/sanitize_hex_color
