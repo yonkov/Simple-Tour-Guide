@@ -6,7 +6,7 @@
     }
     
     const counter = scriptParams.counter;
-    const isDisplayOnce = scriptParams.tour_settings.show_intro ? true: false;
+    const isDisplayOnce = scriptParams.tour_settings.show_intro;
     const isDisplayShortCode = scriptParams.has_tour;
     const isDisplayAllPages = scriptParams.tour_settings.show_on_all_pages;
     const isConfirmCancel = scriptParams.tour_settings.show_confirmation ? true: false;

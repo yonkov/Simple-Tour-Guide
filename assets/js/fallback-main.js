@@ -6,10 +6,11 @@
     }
     
     const counter = scriptParams.counter;
-    const isDisplayOnce = scriptParams.tour_settings.show_intro ? true: false;
+    const isDisplayOnce = scriptParams.tour_settings.show_intro;
     const isDisplayShortCode = scriptParams.has_tour;
     const isDisplayAllPages = scriptParams.tour_settings.show_on_all_pages;
     const isConfirmCancel = scriptParams.tour_settings.show_confirmation ? true: false;
+    const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
     
     const stgStepTitles = [];
