@@ -45,6 +45,7 @@
             useModalOverlay: true,
             when: {
                 show: function() {
+                    if (!isDisplayProgress) return;
                     const currentStepElement = tour.currentStep.el;
                     const header = currentStepElement.querySelector('.shepherd-footer');
                     const progress = document.createElement('div');
