@@ -1,10 +1,4 @@
-.progress-bar{
-    position: absolute;
-    left: 2%;
-    bottom: 9%;
-    font-size: 14px;
-}
-.progress-bar {
+.shepherd-progress-bar {
     position: absolute;
     left: 2%;
     bottom: 9%;
@@ -16,7 +10,7 @@
     padding: 3px;
     background: #e6e6e6
 }
-.progress-bar span {
+.shepherd-progress-bar span {
     display: block;
     background: #3288e6;
     width: 50%;

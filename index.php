@@ -370,7 +370,7 @@ function simple_tour_guide_custom_styles() {
 	if ( ! empty( $btn_bgr_color ) ) :
 		?>
 		 <style>
-		.progress-bar span{
+		.shepherd-progress-bar span{
 			background-color: <?php echo esc_attr( $progress_bar_color ); ?>;
 		}
 		 </style>

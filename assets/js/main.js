@@ -52,7 +52,7 @@
                     const progress = document.createElement('div');
                     const innerBar = document.createElement('span');
                     const progressPercentage = ((tour.steps.indexOf(tour.currentStep) + 1)/tour.steps.length)*100 + '%';
-                    progress.className='progress-bar';
+                    progress.className='shepherd-progress-bar';
                     innerBar.style.width=progressPercentage;
                     // if only one button
                     if (document.getElementsByClassName('shepherd-button').length==1) {
