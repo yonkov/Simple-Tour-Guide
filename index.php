@@ -72,7 +72,7 @@ function simple_tour_guide_admin_scripts_and_styles() {
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	// Plugin settings page style
 	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.0' );
-	// Iris Color picker
+	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );
 
@@ -108,12 +108,7 @@ function simple_tour_guide_page_content_callback() {
 		<?php
 		// Get the active tab from the $_GET param
 		$default_tab = 'create_tour';
-		$active_tab  = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
-
-		if ( isset( $_GET['tab'] ) ) {
-			$active_tab = $_GET['tab'];
-		}
-		?>
+		$active_tab  = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash ($_GET['tab'] ) ) : $default_tab; // // phpcs:ignore csrf ok, sanitization ok. ?> 
 
 		<h2 class="nav-tab-wrapper">
 			<a href="?page=simple_tour_guide&tab=create_tour"
@@ -188,10 +183,10 @@ function simple_tour_guide_setup_sections() {
 	}
 
 	add_option( 'stg_tour', $tour_options ); // default tour
-	register_setting(
+	register_setting( // save tour data
 		'simple_tour_guide_fields',
 		'stg_tour',
-		'simple_tour_guide_sanitize'
+		'simple_tour_guide_sanitize' //sanitize input
 	);
 
 	$general_options = array(
@@ -201,10 +196,10 @@ function simple_tour_guide_setup_sections() {
 		'show_progress'     => true,
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
-	register_setting(
+	register_setting( // save tour settings
 		'simple_tour_guide_additional_fields',
 		'stg_settings',
-		'simple_tour_guide_sanitize'
+		'simple_tour_guide_sanitize' // sanitize input
 	);
 
 	$color_options = array(
@@ -213,10 +208,10 @@ function simple_tour_guide_setup_sections() {
 	);
 
 	add_option( 'stg_colors', $color_options ); // default colors
-	register_setting(
-		'simple_tour_guide_color_fields',
+	register_setting( // save colors
+		'simple_tour_guide_color_fields', 
 		'stg_colors',
-		'simple_tour_guide_sanitize'
+		'simple_tour_guide_sanitize' // sanitize colors
 	);
 }
 

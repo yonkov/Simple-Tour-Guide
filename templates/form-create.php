@@ -1,3 +1,11 @@
+<?php
+/**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
+
 <form class="stg-form" method="post" action="options.php">
 	<?php settings_fields( 'simple_tour_guide_fields' );
 	$tour_options = get_option( 'stg_tour' ); ?>

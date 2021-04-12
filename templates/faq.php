@@ -1,3 +1,11 @@
+<?php
+/**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
+
 <h3><?php _e( 'Frequently Asked Questions', 'simple-tour-guide' ); ?></h3>
 <h4><?php _e( '1. What are the options?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'You can create a tour and add as many steps to it as you want from "Create a Tour" tab. You can add step title, step description, link the step to a specific dom element and add a custom class to it. You can also choose to display the tour only once or show it everytime you reload a page (test mode) and ask for confirmation when the close button is clicked. Another cool feature is the ability to choose on which pages to display the tour. You can also add a progress bar to show the users how many steps remain until the end of the tour and customize the colors of the step buttons and the progress bar via the "Style" tab.', 'simple-tour-guide' ); ?><p>
