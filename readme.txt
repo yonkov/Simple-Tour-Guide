@@ -11,7 +11,7 @@ Tested up to: 5.7
 Stable tag: 1.0.0
 License: GPLv2
 
-Integration of Shepherd.js (https://shepherdjs.dev/) for WordPress. Easily add an interactive step-by-step user guide (introduction tour) for your visitors from a friendly admin interface.
+Easily add an interactive step-by-step user guide (introduction tour) for your visitors from a friendly admin interface.
 
 == Description ==
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
