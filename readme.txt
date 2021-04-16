@@ -27,14 +27,14 @@ You can create a tour and add as many steps to it as you want from "Create a Tou
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
-= Where are the plugin settings? =
-From your WordPress dashboard, click on Settings tab => Simple Tour Guide.
-
 = How to add, edit or delete steps? =
-From the plugin settings page, Go to "Create a Tour" tab and add as many steps as you want.
+From the WordPress admin, go to Settings => Simple Tour Guide and add as many steps as you want.
 
 = Can I link a step to a page element? =
 Sure, you can! Inspect a page element with the browser dev tool (right click with the mouse => inspect element) and then add its selector in the "Step Position" field from "Create a Tour" tab. You can add class, id or tag selector like so: `.class`, `#id`, `tag`. If you do not assign a selector, that is also fine, the step will appear exactly in the middle of the screen.
+
+= Can I show the tour only once? =
+Absolutely! In fact, by default the plugin displays the tour only once. However, you can also choose to display the steps on every page reload (test mode) from the "Tour Options" tab.
 
 = How to show the tour guide only on one page? =
 Go to "Tour Options" tab, uncheck "Show the tour on all pages" box and copy the plugin shortcode `[stg_kef]`. Then, navigate to a page or post you want, click `"edit"` and paste the shortcode on the top of the post content.
