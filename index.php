@@ -361,7 +361,7 @@ function simple_tour_guide_custom_styles() {
 		 </style>
 		<?php
 	endif;
-	if ( ! empty( $btn_bgr_color ) ) :
+	if ( ! empty( $progress_bar_color ) ) :
 		?>
 		 <style>
 		.shepherd-progress-bar span{

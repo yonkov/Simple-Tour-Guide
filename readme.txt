@@ -50,10 +50,10 @@ Deffinitely! I will add new features on the go, just let me know what you need a
 
 == Changelog ==
 = 1.0.1 =
-* Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it
+* Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it. Update css.
 
 = 1.0.0 =
-* First publicly available version of the plugin.
+* First publicly available version of the plugin. Update css.
 
 == Upgrade Notice ==
 = 1.0.1 =
