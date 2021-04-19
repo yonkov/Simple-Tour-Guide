@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: walktrough, product tour, guided tour
@@ -40,12 +40,12 @@ function simple_tour_guide_scripts_and_styles() {
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
 	// Plugin Options style
-	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.0' );
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.1' );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.0', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.1', true );
 	} else { // Fallback for wp < 5.0
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.0', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.1', true );
 	}
 	// pass plugin options
 	global $post;
@@ -65,13 +65,13 @@ add_action( 'wp_enqueue_scripts', 'simple_tour_guide_scripts_and_styles' );
  */
 function simple_tour_guide_admin_scripts_and_styles() {
 	// Plugin settings page script
-	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.1', true );
 	$script_params = array(
 		'counter' => simple_tour_guide_get_steps_count(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	// Plugin settings page style
-	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.0' );
+	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.1' );
 	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );
@@ -241,10 +241,6 @@ add_action( 'wp_ajax_increment_counter', 'simple_tour_guide_increment_counter' )
 add_action( 'wp_ajax_nopriv_increment_counter', 'simple_tour_guide_increment_counter' );
 
 function simple_tour_guide_decrement_counter() {
-	delete_option( 'stg_title_' . esc_attr( get_option( 'stg_steps' ) ) );
-	delete_option( 'stg_description_' . esc_attr( get_option( 'stg_steps' ) ) );
-	delete_option( 'stg_location_' . esc_attr( get_option( 'stg_steps' ) ) );
-	delete_option( 'stg_classname_' . esc_attr( get_option( 'stg_steps' ) ) );
 	// Name of the option
 	$option_name = 'stg_steps';
 	// Decrement the option if is set and bigger that one
@@ -285,8 +281,6 @@ function simple_tour_guide_get_escaped_tour_object_input() {
 
 /**
  * Get the tour general settings. Escape db output
- *
- * @link https://wordpress.stackexchange.com/questions/284023/how-to-escape-multiple-attribute-at-once-in-wordpress
  */
 function simple_tour_guide_get_escaped_tour_settings_input() {
 	$tour_settings = get_option( 'stg_settings' );

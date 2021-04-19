@@ -8,10 +8,10 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.7
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2
 
-Easily add an interactive step-by-step user guide (introduction tour) for your visitors from a friendly admin interface.
+Easily add an interactive step-by-step user guide (intro tour) for your visitors from a friendly admin interface.
 
 == Description ==
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
@@ -34,7 +34,7 @@ From the WordPress admin, go to Settings => Simple Tour Guide and add as many st
 Sure, you can! Inspect a page element with the browser dev tool (right click with the mouse => inspect element) and then add its selector in the "Step Position" field from "Create a Tour" tab. You can add class, id or tag selector like so: `.class`, `#id`, `tag`. If you do not assign a selector, that is also fine, the step will appear exactly in the middle of the screen.
 
 = Can I show the tour only once? =
-Absolutely! In fact, by default the plugin displays the tour only once. However, you can also choose to display the steps on every page reload (test mode) from the "Tour Options" tab.
+Absolutely! In fact, by default the plugin hides the tour when the user finishes or dismisses it. However, you can also choose to display the steps on every page reload (test mode) from the "Tour Options" tab.
 
 = How to show the tour guide only on one page? =
 Go to "Tour Options" tab, uncheck "Show the tour on all pages" box and copy the plugin shortcode `[stg_kef]`. Then, navigate to a page or post you want, click `"edit"` and paste the shortcode on the top of the post content.
@@ -49,10 +49,16 @@ The plugin currently supports only one tour, however you can add an additional t
 Deffinitely! I will add new features on the go, just let me know what you need and I will consider it in a next plugin release.
 
 == Changelog ==
+= 1.0.1 =
+* Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it
+
 = 1.0.0 =
 * First publicly available version of the plugin.
 
 == Upgrade Notice ==
+= 1.0.1 =
+* Refactor and optimize decrement count steps function. 
+
 = 1.0.0 =
 Initial release.
 
