@@ -49,12 +49,13 @@ function simple_tour_guide_scripts_and_styles() {
 	}
 	// pass plugin options
 	global $post;
+	$content = isset($post->post_content) ? $post->post_content : '';
 	$script_params = array(
 		'counter'       => simple_tour_guide_get_steps_count(),
 		'tour_object'   => simple_tour_guide_get_escaped_tour_object_input(),
 		'tour_settings' => simple_tour_guide_get_escaped_tour_settings_input(),
 		'is_admin'      => is_admin(),
-		'has_tour'      => has_shortcode( $post->post_content, 'stg_kef' ),
+		'has_tour'      => has_shortcode( $content, 'stg_kef' ),
 	);
 	wp_localize_script( 'simple-tour-guide', 'scriptParams', $script_params );
 }

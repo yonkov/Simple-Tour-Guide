@@ -18,11 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input name="stg_settings[show_confirmation]" type="checkbox" value="true" <?php checked( 'true', $options['show_confirmation'],  true ); ?> />
 	<label for="stg_settings[show_confirmation]"><?php _e('Ask for confirmation when the user clicks the close button.', 'simple-tour-guide')?></label>
 	<br>
-	<input name="stg_settings[show_on_all_pages]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_on_all_pages'] ) ? 'true' : '', true ); ?> />
-	<label for="stg_settings[show_on_all_pages]"><?php _e('Show the tour on all pages.', 'simple-tour-guide')?></label>
-	<br>
 	<input name="stg_settings[show_progress]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_progress'] ) ? 'true' : '', true ); ?> />
 	<label for="stg_settings[show_progress]"><?php _e('Show tour progress bar', 'simple-tour-guide')?></label>
+	<br>
+	<input name="stg_settings[show_on_all_pages]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_on_all_pages'] ) ? 'true' : '', true ); ?> />
+	<label for="stg_settings[show_on_all_pages]"><?php _e('Show the tour on all pages.', 'simple-tour-guide')?></label>
 	<p><?php _e('You can also use the shortcode ', 'simple-tour-guide')?><code>[stg_kef]</code><?php _e(' to display the tour only on a specific post or page. Uncheck the above option and copy paste the shortcode on top of the post or page you want it to appear.', 'simple-tour-guide')?></p>
 	<?php submit_button(); ?>
 </form>
