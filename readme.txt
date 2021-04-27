@@ -52,7 +52,6 @@ Since version 1.02 you can! You can check the option "Show the tour to logged in
 = 1.0.2 =
 * Adds option to show tour to logged in users only
 
-== Changelog ==
 = 1.0.1 =
 * Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it. Update css.
 
