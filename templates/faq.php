@@ -19,5 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p><?php _e( 'You can use the .stg classname or add a custom class to each step from the "Create a Tour tab". Go to appearance => customize => additional css and add your own custom styles there.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '6. Can I create more than one tour?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'The plugin currently supports only one tour, however you can add an additional tour. Check Shepherd.js documentation on how to do it (you would need to add some custom code).', 'simple-tour-guide' ); ?><p>
-<h4><?php _e( '7. Can I request a new feature?', 'simple-tour-guide' ); ?></h4>
-<p><?php _e( 'Deffinitely! I will add new features on the go, just let me know what you need and I will consider it in a next plugin release.', 'simple-tour-guide' ); ?><p>
+<h4><?php _e( '7. Can I show the tour to logged in users only?', 'simple-tour-guide' ); ?></h4>
+<p><?php _e( 'Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.', 'simple-tour-guide' ); ?><p>

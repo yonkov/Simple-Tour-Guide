@@ -10,8 +10,10 @@
     const isDisplayShortCode = scriptParams.has_tour;
     const isDisplayAllPages = scriptParams.tour_settings.show_on_all_pages;
     const isConfirmCancel = scriptParams.tour_settings.show_confirmation ? true : false;
+    const isDisplayLoggedIn = scriptParams.tour_settings.show_user_logged_in ? true : false;
     const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
+    const isloggedIn = scriptParams.is_logged_in;
 
     const stgStepTitles = [];
     const stgStepDescriptions = [];
@@ -135,12 +137,26 @@
         } 
     }
     //Trigger the tour
-    if (isDisplayAllPages) {
-        initiateTour()
+    if(isDisplayLoggedIn){
+        if (isloggedIn){
+            if (isDisplayAllPages) {
+                initiateTour()
+            }
+            else {
+                if (isDisplayShortCode) {
+                    initiateTour()
+                }
+            }
+        }
     }
     else {
-        if (isDisplayShortCode) {
+        if (isDisplayAllPages) {
             initiateTour()
+        }
+        else {
+            if (isDisplayShortCode) {
+                initiateTour()
+            }
         }
     }
 

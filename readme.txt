@@ -2,13 +2,13 @@
 Contributors: nravota12
 Plugin Name: Simple Tour Guide
 Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
-Tags: user-onboarding, tour, introduction, walktrough, shepherd
+Tags: user-onboarding, tour, introduction, walkthrough, shepherd
 Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors from a friendly admin interface.
@@ -16,7 +16,7 @@ Easily add an interactive step-by-step user guide (intro tour) for your visitors
 == Description ==
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
 The plugin provides a great, neat and fast way to indroduce users to your product or service - by guiding them visually to different elements on your website. 
-An interactive user walktrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepperd.js - an open-source lightweight vanilla js library for guided tours. 
+An interactive user walkthrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepperd.js - an open-source lightweight vanilla js library for guided tours. 
 Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
 
 = Plugin Options =
@@ -45,8 +45,12 @@ Go to "Style" tab and customize accordingly. For additional customizations, you 
 = Can I create more than one tour? =
 The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
 
-= Can I request a new feature? =
-Deffinitely! I will add new features on the go, just let me know what you need and I will consider it in a next plugin release.
+= Can I show the tour to logged in users only? =
+Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
+
+== Changelog ==
+= 1.0.2 =
+* Adds option to show tour to logged in users only
 
 == Changelog ==
 = 1.0.1 =

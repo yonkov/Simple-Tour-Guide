@@ -18,6 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input name="stg_settings[show_confirmation]" type="checkbox" value="true" <?php checked( 'true', $options['show_confirmation'],  true ); ?> />
 	<label for="stg_settings[show_confirmation]"><?php _e('Ask for confirmation when the user clicks the close button.', 'simple-tour-guide')?></label>
 	<br>
+	<input name="stg_settings[show_user_logged_in]" type="hidden" value=""<?php checked( 'true', isset ($options['show_user_logged_in']) ? $options['show_user_logged_in'] : '' ,  true ); ?> />
+	<input name="stg_settings[show_user_logged_in]" type="checkbox" value="true" <?php checked( 'true', isset ($options['show_user_logged_in']) ? $options['show_user_logged_in'] : '',  true ); ?> />
+	<label for="stg_settings[show_user_logged_in]"><?php _e('Show the tour to logged in users only', 'simple-tour-guide')?></label>
+	<br>
 	<input name="stg_settings[show_progress]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_progress'] ) ? 'true' : '', true ); ?> />
 	<label for="stg_settings[show_progress]"><?php _e('Show tour progress bar', 'simple-tour-guide')?></label>
 	<br>

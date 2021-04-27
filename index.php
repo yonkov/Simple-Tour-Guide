@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: walktrough, product tour, guided tour
@@ -55,7 +55,8 @@ function simple_tour_guide_scripts_and_styles() {
 		'tour_object'   => simple_tour_guide_get_escaped_tour_object_input(),
 		'tour_settings' => simple_tour_guide_get_escaped_tour_settings_input(),
 		'is_admin'      => is_admin(),
-		'has_tour'      => has_shortcode( $content, 'stg_kef' ),
+		'is_logged_in' 	=> is_user_logged_in(),
+		'has_tour'      => has_shortcode( $content, 'stg_kef' )
 	);
 	wp_localize_script( 'simple-tour-guide', 'scriptParams', $script_params );
 }
@@ -195,6 +196,7 @@ function simple_tour_guide_setup_sections() {
 		'show_confirmation' => '',
 		'show_on_all_pages' => true,
 		'show_progress'     => true,
+		'show_user_logged_in' => '',
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
 	register_setting( // save tour settings
@@ -311,6 +313,10 @@ function simple_tour_guide_sanitize( $options ) {
 
 	if ( ! empty( $options['show_confirmation'] ) ) {
 		$options['show_confirmation'] = 'true';
+	}
+
+	if ( ! empty( $options['show_user_logged_in'] ) ) {
+		$options['show_user_logged_in'] = 'true';
 	}
 
 	if ( ! empty( $options['show_on_all_pages'] ) ) {
