@@ -177,7 +177,7 @@ function simple_tour_guide_setup_sections() {
 			$title       => __( 'Welcome Aboard!', 'simple-tour-guide' ),
 			$description => __( "Thank you for using Simple Tour Guide plugin. To customize this tour and add more steps, go to the plugin's settings page.", 'simple-tour-guide' ),
 			$location    => '',
-			$classname   => '.my-awesome-class',
+			$classname   => 'my-awesome-class',
 		);
 
 		$tour_options = array_merge( $options, $tour_step );

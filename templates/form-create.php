@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="<?php echo esc_attr( 'stg_tour[classname_' . $step . ']' ); ?>"><?php _e( 'Custom Css Class', 'simple-tour-guide' ); ?></label></th>
-					<td><input type="text" class="form-field" name="<?php echo esc_attr( 'stg_tour[classname_' . $step . ']' ); ?>" placeholder="<?php _e( 'Add an optional css classname to style the step', 'simple-tour-guide' ); ?>" value="<?php echo esc_attr( isset( $tour_options[ 'classname_' . $step ] ) ? $tour_options[ 'classname_' . $step ] : '' ); ?>" /></td>
+					<td><input type="text" class="form-field" name="<?php echo esc_attr( 'stg_tour[classname_' . $step . ']' ); ?>" placeholder="<?php _e( 'Add an optional css class to style the step, .e.g. my-awesome-class', 'simple-tour-guide' ); ?>" value="<?php echo esc_attr( isset( $tour_options[ 'classname_' . $step ] ) ? $tour_options[ 'classname_' . $step ] : '' ); ?>" /></td>
 				</tr>
 			</tbody>
 		<?php endfor; ?>

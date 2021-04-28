@@ -46,7 +46,7 @@ Go to "Style" tab and customize accordingly. For additional customizations, you 
 The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
 
 = Can I show the tour to logged in users only? =
-Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
+Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab. However, please note that the tour is displayed on the site frontend only.
 
 == Changelog ==
 = 1.0.2 =
