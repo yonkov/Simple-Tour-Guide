@@ -11,7 +11,7 @@ Tested up to: 5.7
 Stable tag: 1.0.2
 License: GPLv2
 
-Easily add an interactive step-by-step user guide (intro tour) for your visitors from a friendly admin interface.
+Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
 
 == Description ==
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
