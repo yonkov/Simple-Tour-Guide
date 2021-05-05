@@ -19,5 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p><?php _e( 'You can use the .stg classname or add a custom class to each step from the "Create a Tour tab". Go to appearance => customize => additional css and add your own custom styles there.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '6. Can I create more than one tour?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'The plugin currently supports only one tour, however you can add an additional tour. Check Shepherd.js documentation on how to do it (you would need to add some custom code).', 'simple-tour-guide' ); ?><p>
-<h4><?php _e( '7. Can I show the tour to logged in users only?', 'simple-tour-guide' ); ?></h4>
+<h4><?php _e( '7. Can I add a background overlay to cover the site while the tour goes on?', 'simple-tour-guide' ); ?></h4>
+<p><?php _e( 'Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour Options tab. This will disable any site interaction until the user has finished or dismissed the tour.', 'simple-tour-guide' ); ?><p>
+<h4><?php _e( '8. Can I show the tour to logged in users only?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.', 'simple-tour-guide' ); ?><p>
+<h4><?php _e( '9. Can I run the tour inside the WP Admin?', 'simple-tour-guide' ); ?></h4>
+<p><?php _e( 'No, the scope of this plugin is the site frontend.', 'simple-tour-guide' ); ?><p>

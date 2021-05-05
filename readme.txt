@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.7
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -45,12 +45,21 @@ Go to "Style" tab and customize accordingly. For additional customizations, you 
 = Can I create more than one tour? =
 The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
 
+= Can I add a background overlay to cover the site while the tour goes on?
+Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
+
 = Can I show the tour to logged in users only? =
-Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab. However, please note that the tour is displayed on the site frontend only.
+Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
+
+= Can I run the tour inside the WP Admin? =
+No, the scope of this plugin is the site frontend only.
 
 == Changelog ==
+= 1.0.3 =
+* Adds option to show dark modal overlay to cover the site until the user has finished the tour.
+
 = 1.0.2 =
-* Adds option to show tour to logged in users only
+* Adds option to show tour to logged in users only.
 
 = 1.0.1 =
 * Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it. Update css.

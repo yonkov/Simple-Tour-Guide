@@ -11,6 +11,7 @@
     const isDisplayAllPages = scriptParams.tour_settings.show_on_all_pages;
     const isConfirmCancel = scriptParams.tour_settings.show_confirmation ? true : false;
     const isDisplayLoggedIn = scriptParams.tour_settings.show_user_logged_in ? true : false;
+    const isModalOverlay = scriptParams.tour_settings.show_modal ? true : false;
     const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
     const isloggedIn = scriptParams.is_logged_in;
@@ -39,6 +40,7 @@
     }
 
     const tour = new Shepherd.Tour({
+        useModalOverlay: isModalOverlay,
         defaultStepOptions: {
             classes: 'stg',
             scrollTo: true,
@@ -46,7 +48,6 @@
                 enabled: true,
                 label: wp.i18n.__('Close', 'simple-tour-guide')
             },
-            useModalOverlay: true,
             when: {
                 show: function () {
                     if (!isDisplayProgress) return;

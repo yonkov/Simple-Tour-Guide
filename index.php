@@ -3,10 +3,10 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
- * Tags: walktrough, product tour, guided tour
+ * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
  * License: GPL
  * Text Domain: simple-tour-guide
 =====================================================================================
@@ -40,23 +40,23 @@ function simple_tour_guide_scripts_and_styles() {
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
 	// Plugin Options style
-	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.1' );
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.3' );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.1', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.3', true );
 	} else { // Fallback for wp < 5.0
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.1', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.3', true );
 	}
 	// pass plugin options
 	global $post;
-	$content = isset($post->post_content) ? $post->post_content : '';
+	$content       = isset( $post->post_content ) ? $post->post_content : '';
 	$script_params = array(
 		'counter'       => simple_tour_guide_get_steps_count(),
 		'tour_object'   => simple_tour_guide_get_escaped_tour_object_input(),
 		'tour_settings' => simple_tour_guide_get_escaped_tour_settings_input(),
 		'is_admin'      => is_admin(),
-		'is_logged_in' 	=> is_user_logged_in(),
-		'has_tour'      => has_shortcode( $content, 'stg_kef' )
+		'is_logged_in'  => is_user_logged_in(),
+		'has_tour'      => has_shortcode( $content, 'stg_kef' ),
 	);
 	wp_localize_script( 'simple-tour-guide', 'scriptParams', $script_params );
 }
@@ -67,13 +67,13 @@ add_action( 'wp_enqueue_scripts', 'simple_tour_guide_scripts_and_styles' );
  */
 function simple_tour_guide_admin_scripts_and_styles() {
 	// Plugin settings page script
-	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.1', true );
+	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.3', true );
 	$script_params = array(
 		'counter' => simple_tour_guide_get_steps_count(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	// Plugin settings page style
-	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.1' );
+	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.3' );
 	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );
@@ -110,7 +110,9 @@ function simple_tour_guide_page_content_callback() {
 		<?php
 		// Get the active tab from the $_GET param
 		$default_tab = 'create_tour';
-		$active_tab  = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash ($_GET['tab'] ) ) : $default_tab; // // phpcs:ignore csrf ok, sanitization ok. ?> 
+		$active_tab  = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : $default_tab; // // phpcs:ignore csrf ok, sanitization ok. 
+		?>
+		 
 
 		<h2 class="nav-tab-wrapper">
 			<a href="?page=simple_tour_guide&tab=create_tour"
@@ -188,14 +190,15 @@ function simple_tour_guide_setup_sections() {
 	register_setting( // save tour data
 		'simple_tour_guide_fields',
 		'stg_tour',
-		'simple_tour_guide_sanitize' //sanitize input
+		'simple_tour_guide_sanitize' // sanitize input
 	);
 
 	$general_options = array(
-		'show_intro'        => true,
-		'show_confirmation' => '',
-		'show_on_all_pages' => true,
-		'show_progress'     => true,
+		'show_intro'          => true,
+		'show_confirmation'   => '',
+		'show_modal'          => '',
+		'show_on_all_pages'   => true,
+		'show_progress'       => true,
 		'show_user_logged_in' => '',
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
@@ -212,7 +215,7 @@ function simple_tour_guide_setup_sections() {
 
 	add_option( 'stg_colors', $color_options ); // default colors
 	register_setting( // save colors
-		'simple_tour_guide_color_fields', 
+		'simple_tour_guide_color_fields',
 		'stg_colors',
 		'simple_tour_guide_sanitize' // sanitize colors
 	);
@@ -317,6 +320,10 @@ function simple_tour_guide_sanitize( $options ) {
 
 	if ( ! empty( $options['show_user_logged_in'] ) ) {
 		$options['show_user_logged_in'] = 'true';
+	}
+
+	if ( ! empty( $options['show_modal'] ) ) {
+		$options['show_modal'] = 'true';
 	}
 
 	if ( ! empty( $options['show_on_all_pages'] ) ) {
