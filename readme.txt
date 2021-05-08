@@ -45,8 +45,23 @@ Go to "Style" tab and customize accordingly. For additional customizations, you 
 = Can I create more than one tour? =
 The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
 
-= Can I add a background overlay to cover the site while the tour goes on?
+= Can I add a background overlay to disable the rest of the site while the tour is active?
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
+Please note that in some rare cases this might interfere with the site usability on mobile. If you need to remove the dark overlay on mobile, add the following css to Appearance => Customize => Additional css:
+
+    @media(max-width:62em) {
+        .shepherd-modal-overlay-container.shepherd-modal-is-visible {
+            display: none;
+        }
+    }
+
+In addition, in some extreme cases, you might also want to remove the whole tour on mobile and tablet like so:
+    
+    @media(max-width:62em) {
+        .stg {
+		    display: none;
+	    }
+    }
 
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
