@@ -350,10 +350,10 @@ function simple_tour_guide_sanitize( $options ) {
 	}
 	// Colors
 	if ( ! empty( $options['btn_color'] ) ) {
-		$options['input_example'] = sanitize_hex_color( $options['btn_color'] );
+		$options['input_example'] = simple_tour_guide_sanitize_hex_color( $options['btn_color'] );
 	}
 	if ( ! empty( $options['progress_color'] ) ) {
-		$options['progress_color'] = sanitize_hex_color( $options['progress_color'] );
+		$options['progress_color'] = simple_tour_guide_sanitize_hex_color( $options['progress_color'] );
 	}
 
 	return $options;
@@ -395,8 +395,8 @@ add_action( 'wp_head', 'simple_tour_guide_custom_styles' );
  * @link https://developer.wordpress.org/reference/functions/sanitize_hex_color
  */
 
-if ( ! function_exists( 'sanitize_hex_color' ) ) {
-	function sanitize_hex_color( $color ) {
+if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
+	function simple_tour_guide_sanitize_hex_color( $color ) {
 		if ( '' === $color ) {
 			return '';
 		}
