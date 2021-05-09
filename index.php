@@ -40,12 +40,12 @@ function simple_tour_guide_scripts_and_styles() {
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
 	// Plugin Options style
-	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.3' );
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.4' );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.3', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.4', true );
 	} else { // Fallback for wp < 5.0
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.3', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.4', true );
 	}
 	// pass plugin options
 	global $post;
@@ -67,13 +67,13 @@ add_action( 'wp_enqueue_scripts', 'simple_tour_guide_scripts_and_styles' );
  */
 function simple_tour_guide_admin_scripts_and_styles() {
 	// Plugin settings page script
-	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.3', true );
+	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.4', true );
 	$script_params = array(
 		'counter' => simple_tour_guide_get_steps_count(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	// Plugin settings page style
-	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.3' );
+	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.4' );
 	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );

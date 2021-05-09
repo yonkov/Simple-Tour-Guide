@@ -22,8 +22,9 @@
     const stgStepLocations = [];
     const stgStepClassnames = [];
 
-    //Construct the steps
-    const steps = [];
+    const steps = []; //Construct the steps
+
+    let isBack =false; //flag if back button is pressed
 
     // get the data and organize it into arrays
     for (i = 0; i < counter; i++) {
@@ -83,11 +84,17 @@
             buttons: [
                 {
                     text: 'Back',
-                    action: tour.back
+                    action() {
+                        isBack=true;
+                        return this.back();
+                    }
                 },
                 {
                     text: 'Next',
-                    action: tour.next
+                    action() {
+                        isBack=false;
+                        return this.next();
+                    }
                 },
                 {
                     text: 'Finish',
@@ -106,8 +113,14 @@
                     setTimeout(() => {
                         currentStep = tour.steps[currentIndex].el;
                         if (currentStep.hasAttribute('data-popper-reference-hidden')) {
-                            tour.next();
-                        }                
+                            if(!isBack){
+                                tour.next();
+                            }
+                            else{
+                                tour.back();
+                            }
+                        }
+
                     }, 100);
                     resolve();
                 }
