@@ -101,15 +101,17 @@
                 }
             ],
             beforeShowPromise: () => new Promise((resolve) => {
-                if(!isSkipStep) resolve();
-                const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
-                let currentStep ='';
-                setTimeout(() => {
-                    currentStep = tour.steps[currentIndex].el;
-                    if (currentStep.hasAttribute('data-popper-reference-hidden')) {
-                        tour.next();
-                    }                
-                }, 100);
+                if(isSkipStep){
+                    const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
+                    let currentStep ='';
+                    setTimeout(() => {
+                        currentStep = tour.steps[currentIndex].el;
+                        if (currentStep.hasAttribute('data-popper-reference-hidden')) {
+                            tour.next();
+                        }                
+                    }, 100);
+                    resolve();
+                }
                 resolve();
             })
         }
