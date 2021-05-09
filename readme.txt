@@ -48,10 +48,13 @@ The plugin currently supports only one tour, however you can add an additional t
 = Can I add a background overlay to disable the rest of the site while the tour is active? =
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
 
-= The tour stops when it cannot find an element attached to it. What can I do? =
+= The tour stops when I link a step to an element that is not visible. What can I do? =
 This may happen when you link a step to a page element that is hidden with css on specific screen sizes. For example, a menu item on mobile that is hidden until the user opens the menu. If the user has not opened the menu yet, the tour might stop in the middle. Luckily, there are a few ways to handle this.
+
 The easiest way to fix this is not to attach the step to the element and the step will appear in the middle of the screen.
-Since version 1.04, you can also decide to skip a step if the element which is attached to it appears off-screen. All you need to do is go to "Tour Options" and add a tick to "Skip a step if a step is attached to an element but the element is not visible".
+
+Since version 1.04, you can skip a step if the element which is attached to it appears off-screen. All you need to do is go to "Tour Options" and add a tick to "Skip a step if a step is attached to an element but the element is not visible".
+
 Another solution could be to "detach" the element from its step for that screen size only. In this way, the step will appear in the center of the screen and the tour will continue to work just fine. Add the following css to Appearance => Theme => Customize:
     
     @media(max-width:62em) {
