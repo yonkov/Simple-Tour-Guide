@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.7
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -20,7 +20,7 @@ An interactive user walkthrough is a powerful way to increase user experience an
 Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
 
 = Plugin Options =
-You can create a tour and add as many steps to it as you want from "Create a Tour" tab. You can add step title, step description, link the step to a specific dom element and add a custom class to it. You can also choose to display the tour only once or show it everytime you reload a page (test mode) and ask for confirmation when the close button is clicked. Another cool feature is the ability to choose on which pages to display the tour. If you want, you can also choose to display the tour to logged in users only. You can also add a progress bar to show the users how many steps remain until the end of the tour and customize the colors of the step buttons and the progress bar via the "Style" tab.
+You can create a tour and add as many steps to it as you want from "Create a Tour" tab. You can add step title, step description, link the step to a specific dom element and add a custom class to it. You can also choose to display the tour only once or show it everytime you reload a page (test mode) and ask for confirmation when the close button is clicked. Another cool feature is the ability to choose on which pages to display the tour. If you want, you can also choose to display the tour to logged in users only and disable the rest of the site while the tour is active. You can also add a progress bar to show the users how many steps remain until the end of the tour and customize the colors of the step buttons and the progress bar via the "Style" tab.
 
 == Installation ==
 1. Take the easy route and install through the WordPress plugin installer or download the .zip file and upload the unzipped folder to the `/wp-content/plugins/` directory
@@ -45,23 +45,38 @@ Go to "Style" tab and customize accordingly. For additional customizations, you 
 = Can I create more than one tour? =
 The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
 
-= Can I add a background overlay to disable the rest of the site while the tour is active?
+= Can I add a background overlay to disable the rest of the site while the tour is active? =
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
-Please note that in some rare cases this might interfere with the site usability on mobile. If you need to remove the dark overlay on mobile, add the following css to Appearance => Customize => Additional css:
 
+= The tour gets stuck when it cannot find an element attached to it. What can I do? Please, help! =
+This is a known issue that may happen when you link a step to a page element that is hidden with css on specific screen resolution. For example, menu items on mobile are usually hidden until the user opens the menu. If the user has not opened the menu yet, the tour might get stuck. Luckily, there are a few ways to solve it.
+The easiest way to handle this is not to attach the step to the particular element and the step will appear in the middle of the screen. However, in some cases this is not an option. 
+Since version 1.04, you can decide to skip a step if the element which is attached to it appears off-screen. All you need to do is go to "Tour Options" and add a tick to "Skip a step if a step is attached to an element but the element is not visible". Though not ideal, this will provide smooth user experience as there is no way to "lock" yourself inside the tour.
+Another solution could be to "detach" the element from its step for that screen size only. In this way, the step will appear in the center of the screen and the tour will continue to work just fine. Add the following css to Appearance => Theme => Customize:
+    
     @media(max-width:62em) {
-        .shepherd-modal-overlay-container.shepherd-modal-is-visible {
+        .stg[data-popper-reference-hidden]{
+            opacity: 1 !important;
+            visibility: visible !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            pointer-events: auto !important;
+        }
+        .stg[data-popper-reference-hidden] > .shepherd-arrow {
             display: none;
         }
     }
 
-In addition, in some extreme cases, you might also want to remove the whole tour on mobile and tablet like so:
+A third option (though I do not recommend it) is to simply remove the whole tour on a specific screen size. Add this css code to disable the tour on mobile and tablet:
     
     @media(max-width:62em) {
         .stg {
 		    display: none;
 	    }
     }
+
+The above code targets mobile and tablet users only and detaches a step that was linked to an element which is not visible. 
 
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
@@ -70,11 +85,14 @@ Since version 1.02 you can! You can check the option "Show the tour to logged in
 No, the scope of this plugin is the site frontend only.
 
 == Changelog ==
+= 1.0.4 =
+* Add option to skip a step for better ux and rewrite sanitization function for backwards compatibility. Update docs.
+
 = 1.0.3 =
-* Adds option to show dark modal overlay to cover the site until the user has finished the tour.
+* Add option to show dark modal overlay to cover the site until the user has finished the tour.
 
 = 1.0.2 =
-* Adds option to show tour to logged in users only.
+* Add option to show tour to logged in users only.
 
 = 1.0.1 =
 * Refactor and optimize decrement count steps function.  Hide the tour afrer the user finishes or dismisses it. Update css.

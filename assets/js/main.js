@@ -12,6 +12,7 @@
     const isConfirmCancel = scriptParams.tour_settings.show_confirmation ? true : false;
     const isDisplayLoggedIn = scriptParams.tour_settings.show_user_logged_in ? true : false;
     const isModalOverlay = scriptParams.tour_settings.show_modal ? true : false;
+    const isSkipStep = scriptParams.tour_settings.skip_step ? true : false;
     const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
     const isloggedIn = scriptParams.is_logged_in;
@@ -98,7 +99,19 @@
                     }
 
                 }
-            ]
+            ],
+            beforeShowPromise: () => new Promise((resolve) => {
+                if(!isSkipStep) resolve();
+                const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
+                let currentStep ='';
+                setTimeout(() => {
+                    currentStep = tour.steps[currentIndex].el;
+                    if (currentStep.hasAttribute('data-popper-reference-hidden')) {
+                        tour.next();
+                    }                
+                }, 100);
+                resolve();
+            })
         }
 
         steps[i] = step;

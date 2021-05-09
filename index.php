@@ -197,6 +197,7 @@ function simple_tour_guide_setup_sections() {
 		'show_intro'          => true,
 		'show_confirmation'   => '',
 		'show_modal'          => '',
+		'skip_step'           => '',
 		'show_on_all_pages'   => true,
 		'show_progress'       => true,
 		'show_user_logged_in' => '',
@@ -324,6 +325,10 @@ function simple_tour_guide_sanitize( $options ) {
 
 	if ( ! empty( $options['show_modal'] ) ) {
 		$options['show_modal'] = 'true';
+	}
+
+	if ( ! empty( $options['skip_step'] ) ) {
+		$options['skip_step'] = 'true';
 	}
 
 	if ( ! empty( $options['show_on_all_pages'] ) ) {

@@ -25,6 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input name="stg_settings[show_modal]" type="checkbox" value="true" <?php checked( 'true', isset ($options['show_modal']) ? $options['show_modal'] : '',  true ); ?> />
 	<label for="stg_settings[show_modal]"><?php _e('Show modal background overlay when the tour is active.', 'simple-tour-guide')?></label>
 	<br>
+	<input name="stg_settings[skip_step]" type="checkbox" value="true" <?php checked( 'true', isset ($options['skip_step']) ? $options['skip_step'] : '',  true ); ?> />
+	<label for="stg_settings[skip_step]"><?php _e('Skip a step if a step is attached to an element but the element is not visible.', 'simple-tour-guide')?></label>
+	<br>
 	<input name="stg_settings[show_progress]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_progress'] ) ? 'true' : '', true ); ?> />
 	<label for="stg_settings[show_progress]"><?php _e('Show tour progress bar', 'simple-tour-guide')?></label>
 	<br>
