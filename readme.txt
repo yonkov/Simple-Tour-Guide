@@ -16,7 +16,7 @@ Easily add an interactive step-by-step user guide (intro tour) for your visitors
 == Description ==
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
 The plugin provides a great, neat and fast way to indroduce users to your product or service - by guiding them visually to different elements on your website. 
-An interactive user walkthrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepperd.js - an open-source lightweight vanilla js library for guided tours. 
+An interactive user walkthrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepherd.js - an open-source lightweight vanilla js library for guided tours. 
 Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
 
 = Plugin Options =
@@ -53,7 +53,7 @@ This may happen when you link a step to a page element that is hidden with css o
 
 The easiest way to fix this is not to attach the step to the element and the step will appear in the middle of the screen.
 
-Since version 1.04, you can skip a step if the element which is attached to it appears off-screen. All you need to do is go to "Tour Options" and add a tick to "Skip a step if the step is attached to an element but the element is not visible".
+Since version 1.04, you can skip a step if the element which is attached to it appears off-screen. All you need to do is go to "Tour Options" and add a tick to "Skip a step if a step is attached to an element but the element is not visible".
 
 Another solution could be to "detach" the element from its step for that screen size only. In this way, the step will appear in the center of the screen and the tour will continue to work just fine. Add the following css to Appearance => Theme => Customize:
     
