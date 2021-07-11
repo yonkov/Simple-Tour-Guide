@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -24,6 +24,42 @@ along with WordPress; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 =====================================================================================
 */
+
+if ( ! function_exists( 'stg_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function stg_fs() {
+        global $stg_fs;
+
+        if ( ! isset( $stg_fs ) ) {
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+
+            $stg_fs = fs_dynamic_init( array(
+                'id'                  => '8672',
+                'slug'                => 'simple-tour-guide',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_2bda447899847b35d8414c6e7a13e',
+                'is_premium'          => false,
+                'has_addons'          => false,
+                'has_paid_plans'      => false,
+                'menu'                => array(
+                    'slug'           => 'simple_tour_guide',
+                    'account'        => false,
+                    'parent'         => array(
+                        'slug' => 'options-general.php',
+                    ),
+                ),
+            ) );
+        }
+
+        return $stg_fs;
+    }
+
+    // Init Freemius.
+    stg_fs();
+    // Signal that SDK was initiated.
+    do_action( 'stg_fs_loaded' );
+}
 
 /**
  * Exit if accessed directly

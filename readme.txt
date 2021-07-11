@@ -7,8 +7,8 @@ Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
-Tested up to: 5.7
-Stable tag: 1.0.4
+Tested up to: 5.8
+Stable tag: 1.0.5
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -88,6 +88,9 @@ Since version 1.02 you can! You can check the option "Show the tour to logged in
 No, the scope of this plugin is the site frontend only.
 
 == Changelog ==
+= 1.0.5 =
+* Integrate Freemius SDK
+
 = 1.0.4 =
 * Add option to skip a step for better ux and rewrite sanitization function for backwards compatibility. Update docs.
 
