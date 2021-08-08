@@ -19,10 +19,10 @@ The plugin provides a great, neat and fast way to indroduce users to your produc
 An interactive user walkthrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepherd.js - an open-source lightweight vanilla js library for guided tours. 
 Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
 
-[youtube https://www.youtube.com/watch?v=TRHfuENMbzk]
-
 = Plugin Options =
 You can create a tour and add as many steps to it as you want from "Create a Tour" tab. You can add step title, step description, link the step to a specific dom element and add a custom class to it. You can also choose to display the tour only once or show it everytime you reload a page (test mode) and ask for confirmation when the close button is clicked. Another cool feature is the ability to choose on which pages to display the tour. If you want, you can also choose to display the tour to logged in users only and disable the rest of the site while the tour is active. You can also add a progress bar to show the users how many steps remain until the end of the tour and customize the colors of the step buttons and the progress bar via the "Style" tab.
+
+[youtube https://www.youtube.com/watch?v=TRHfuENMbzk]
 
 == Installation ==
 1. Take the easy route and install through the WordPress plugin installer or download the .zip file and upload the unzipped folder to the `/wp-content/plugins/` directory
@@ -74,14 +74,6 @@ Another solution could be to "detach" the element from its step for that screen 
     }
 
 The above code targets mobile and tablet users only and detaches a step that was linked to an element which is not visible. 
-
-The final option (last resort) would be to remove the whole tour on a specific screen size. Add this css code to disable the tour on mobile and tablet:
-    
-    @media(max-width:62em) {
-        .stg {
-		    display: none;
-	    }
-    }
 
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
