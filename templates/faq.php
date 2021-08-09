@@ -25,3 +25,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p><?php _e( 'Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '9. Can I run the tour inside the WP Admin?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'No, the scope of this plugin is the site frontend.', 'simple-tour-guide' ); ?><p>
+<h4><?php _e( "10. Can I customize the tour beyond the plugin's options?", "simple-tour-guide" ); ?></h4>
+<p><?php printf( __("You can override the plugin's js file and enqueue your own. In this way, you will be able to use all the options provided by shepherd.js. Please check <a href=%s>plugin's documentation</a> on how to do it.", 'simple-tour-guide' ),'https://wordpress.org/plugins/simple-tour-guide/#Can%20I%20customize%20the%20tour%20beyond%20the%20existing%20options%3F' ); ?><p>

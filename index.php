@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -25,42 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 =====================================================================================
 */
 
-if ( ! function_exists( 'stg_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function stg_fs() {
-        global $stg_fs;
-
-        if ( ! isset( $stg_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname(__FILE__) . '/freemius/start.php';
-
-            $stg_fs = fs_dynamic_init( array(
-                'id'                  => '8672',
-                'slug'                => 'simple-tour-guide',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_2bda447899847b35d8414c6e7a13e',
-                'is_premium'          => false,
-                'has_addons'          => false,
-                'has_paid_plans'      => false,
-                'menu'                => array(
-                    'slug'           => 'simple_tour_guide',
-                    'account'        => false,
-                    'parent'         => array(
-                        'slug' => 'options-general.php',
-                    ),
-                ),
-            ) );
-        }
-
-        return $stg_fs;
-    }
-
-    // Init Freemius.
-    stg_fs();
-    // Signal that SDK was initiated.
-    do_action( 'stg_fs_loaded' );
-}
-
 /**
  * Exit if accessed directly
  */
@@ -74,14 +38,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 function simple_tour_guide_scripts_and_styles() {
 	// Shepherd scripts and styles
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
-	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.js', array(), '8.2.3', true );
+	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.js', array(), '8.2.3', true );
 	// Plugin Options style
-	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.4' );
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', '1.0.6' );
 	// Plugin options script
 	if ( version_compare( $GLOBALS['wp_version'], '5.0-alpha', '>=' ) ) {
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.4', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'wp-i18n' ), '1.0.6', true );
 	} else { // Fallback for wp < 5.0
-		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.4', true );
+		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/fallback-main.js', array(), '1.0.6', true );
 	}
 	// pass plugin options
 	global $post;
@@ -103,13 +67,13 @@ add_action( 'wp_enqueue_scripts', 'simple_tour_guide_scripts_and_styles' );
  */
 function simple_tour_guide_admin_scripts_and_styles() {
 	// Plugin settings page script
-	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.4', true );
+	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), '1.0.6', true );
 	$script_params = array(
 		'counter' => simple_tour_guide_get_steps_count(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	// Plugin settings page style
-	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.4' );
+	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', '1.0.6' );
 	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );
@@ -148,7 +112,6 @@ function simple_tour_guide_page_content_callback() {
 		$default_tab = 'create_tour';
 		$active_tab  = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : $default_tab; // // phpcs:ignore csrf ok, sanitization ok. 
 		?>
-		 
 
 		<h2 class="nav-tab-wrapper">
 			<a href="?page=simple_tour_guide&tab=create_tour"
