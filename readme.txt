@@ -92,7 +92,7 @@ You can override the plugin's js file and enqueue your own:
 
     add_action( 'wp_enqueue_scripts', 'my_modified_tour' );
 
-In this way, you can take advantage of all the options provided by [shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html).
+In this way, you can take advantage of all the options provided by [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html).
 
 == Changelog ==
 = 1.0.6 =
