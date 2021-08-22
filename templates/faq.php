@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <h4><?php _e( '5. How to customize the style of the steps?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'You can use the .stg classname or add a custom class to each step from the "Create a Tour tab". Go to appearance => customize => additional css and add your own custom styles there.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '6. Can I create more than one tour?', 'simple-tour-guide' ); ?></h4>
-<p><?php _e( 'The plugin currently supports only one tour, however you can add an additional tour. Check Shepherd.js documentation on how to do it (you would need to add some custom code).', 'simple-tour-guide' ); ?><p>
+<p><?php _e( 'The plugin currently supports only one tour, however you can add an additional tour. Check Shepherd.js documentation on how to do it, as well as the last question in this section (you would need to add some custom code).', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '7. Can I add a background overlay to cover the site while the tour goes on?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour Options tab. This will disable any site interaction until the user has finished or dismissed the tour.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( '8. Can I show the tour to logged in users only?', 'simple-tour-guide' ); ?></h4>
@@ -26,4 +26,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 <h4><?php _e( '9. Can I run the tour inside the WP Admin?', 'simple-tour-guide' ); ?></h4>
 <p><?php _e( 'No, the scope of this plugin is the site frontend.', 'simple-tour-guide' ); ?><p>
 <h4><?php _e( "10. Can I customize the tour beyond the plugin's options?", "simple-tour-guide" ); ?></h4>
-<p><?php printf( __("You can override the plugin's js file and enqueue your own. In this way, you will be able to use all the options provided by shepherd.js. Please check <a href=%s>plugin's documentation</a> on how to do it.", 'simple-tour-guide' ),'https://wordpress.org/plugins/simple-tour-guide/#Can%20I%20customize%20the%20tour%20beyond%20the%20existing%20options%3F' ); ?><p>
+<p><?php printf( __("You can override the plugin's js file and enqueue your own. In this way, you will be able to use all the options provided by shepherd.js. Please check <a href=%s>plugin's documentation</a> on how to do it.", 'simple-tour-guide' ), 'https://wordpress.org/plugins/simple-tour-guide/#can%20i%20customize%20the%20tour%20beyond%20the%20existing%20options%3F' ); ?><p>
