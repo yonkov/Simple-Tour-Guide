@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php settings_fields( 'simple_tour_guide_fields' );
 	$tour_options = get_option( 'stg_tour' ); ?>
 	<h3><?php esc_html_e( 'Add a Tour', 'simple-tour-guide' ); ?></h3>
-	<p><?php esc_html_e( 'Create a guided video tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
+	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
 	<table class="form-table stg-table">
 		<?php
 		for ( $step = 1; $step <= $steps; $step++ ) :
