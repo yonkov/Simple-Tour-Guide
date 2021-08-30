@@ -4,7 +4,7 @@
         localStorage.removeItem('tour-guide');
         return;
     }
-
+    const strings = scriptParams.strings;
     const counter = scriptParams.counter;
     const isDisplayOnce = scriptParams.tour_settings.show_intro;
     const isDisplayShortCode = scriptParams.has_tour;
@@ -48,7 +48,7 @@
             scrollTo: true,
             cancelIcon: {
                 enabled: true,
-                label: wp.i18n.__('Close', 'simple-tour-guide')
+                label: strings.close
             },
             when: {
                 show: function () {
@@ -84,21 +84,21 @@
             classes: '',
             buttons: [
                 {
-                    text: wp.i18n.__('Back', 'simple-tour-guide'),
+                    text: strings.back,
                     action() {
                         isBack=true;
                         return this.back();
                     }
                 },
                 {
-                    text: wp.i18n.__('Next', 'simple-tour-guide'),
+                    text: strings.next,
                     action() {
                         isBack=false;
                         return this.next();
                     }
                 },
                 {
-                    text: wp.i18n.__('Finish', 'simple-tour-guide'),
+                    text: strings.finish,
                     action() {
                         // Dismiss the tour when the finish button is clicked and the option is set via the plugin settings page
                         dismissTour();

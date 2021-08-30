@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.8
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -82,7 +82,7 @@ Since version 1.02 you can! You can check the option "Show the tour to logged in
 No, the scope of this plugin is the site frontend only.
 
 = Can I customize the tour beyond the existing options?
-You can override the plugin's js file and enqueue your own:
+You can override the plugin's default js file and enqueue your own:
 
     function my_modified_tour() {
         wp_dequeue_script( 'simple-tour-guide' );
@@ -92,9 +92,13 @@ You can override the plugin's js file and enqueue your own:
 
     add_action( 'wp_enqueue_scripts', 'my_modified_tour' );
 
-In this way, you can take advantage of all the options provided by [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html).
+In this way, you will be able to create your own custom tour and get access to all the options provided by the [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) library.
+Happy Coding!
 
 == Changelog ==
+= 1.0.7 =
+* Use one js file for all supported wp versions. Update translation functions.
+
 = 1.0.6 =
 * Remove Freemius SDK. Upgrade docs. Minify shepherd js. 
 
