@@ -17,7 +17,7 @@ Easily add an interactive step-by-step user guide (intro tour) for your visitors
 Simple Tour Guide is an easy to use step-by-step onboarding user guide that lets you create an interactive guided tour for your visitors. 
 The plugin provides a great, neat and fast way to indroduce users to your product or service - by guiding them visually to different elements on your website. 
 An interactive user walkthrough is a powerful way to increase user experience and customer satisfaction. This plugin is based on Shepherd.js - an open-source lightweight vanilla js library for guided tours. 
-Customize the text, the number of popups and link to any DOM element through a friendly user admin interface.
+Customize the text, the number of popups (steps) and link to any DOM element through a friendly user admin interface.
 
 = Plugin Options =
 You can create a tour and add as many steps to it as you want from "Create a Tour" tab. You can add step title, step description, link the step to a specific dom element and add a custom class to it. You can also choose to display the tour only once or show it everytime you reload a page (test mode) and ask for confirmation when the close button is clicked. Another cool feature is the ability to choose on which pages to display the tour. If you want, you can also choose to display the tour to logged in users only and disable the rest of the site while the tour is active. You can also add a progress bar to show the users how many steps remain until the end of the tour and customize the colors of the step buttons and the progress bar via the "Style" tab.
@@ -45,7 +45,7 @@ Go to "Tour Options" tab, uncheck "Show the tour on all pages" box and copy the 
 Go to "Style" tab and customize accordingly. For additional customizations, you can use the `.stg` classname or add a custom class to each step from the "Create a Tour" tab. Go to `Аppearance => Customize => Additional css` and add your own custom styles there.
 
 = Can I create more than one tour? =
-The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it (you would need to add some custom code to make it work).
+The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it, as well as the last question in this section (you would need to add some custom code to make it work).
 
 = Can I add a background overlay to disable the rest of the site while the tour is active? =
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
