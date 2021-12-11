@@ -112,20 +112,20 @@
                     const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
                     let currentStep ='';
                     setTimeout(() => {
-                        currentStep = tour.steps[currentIndex].el;
-                        if (currentStep.hasAttribute('data-popper-reference-hidden')) {
-                            if(!isBack){
-                                tour.next();
+                            currentStep = tour.steps[currentIndex].el;
+                            if (currentStep.hasAttribute('data-popper-reference-hidden')) {
+                                if(!isBack){
+                                    tour.next();
+                                }
+                                else{
+                                    tour.back();
+                                }
                             }
-                            else{
-                                tour.back();
-                            }
-                        }
-
-                    }, 100);
+                    },750);
                     resolve();
                 }
                 resolve();
+                dismissTour();
             })
         }
 
