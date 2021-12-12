@@ -38,7 +38,7 @@
         stgStepLocations[i] = stgStepLocation;
 
         const stgStepClassname = tourObj[`classname_${i + 1}`];
-        stgStepClassnames[i] = stgStepClassname;
+        stgStepClassnames[i] = stgStepClassname.startsWith('.') ? stgStepClassname.substring(1) : stgStepClassname;
     }
 
     const tour = new Shepherd.Tour({
@@ -112,20 +112,19 @@
                     const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
                     let currentStep ='';
                     setTimeout(() => {
-                            currentStep = tour.steps[currentIndex].el;
-                            if (currentStep.hasAttribute('data-popper-reference-hidden')) {
-                                if(!isBack){
-                                    tour.next();
-                                }
-                                else{
-                                    tour.back();
-                                }
+                        currentStep = tour.steps[currentIndex].el;
+                        if (currentStep.hasAttribute('data-popper-reference-hidden')) {
+                            if(!isBack){
+                                tour.next();
                             }
+                            else{
+                                tour.back();
+                            }
+                        }
                     },750);
                     resolve();
                 }
                 resolve();
-                dismissTour();
             })
         }
 

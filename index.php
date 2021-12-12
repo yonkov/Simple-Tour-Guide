@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.0.8' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.0.9' );
 
 /**
  * Enqueue scripts and styles.
