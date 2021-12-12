@@ -75,6 +75,23 @@ Another solution could be to "detach" the element from its step for that screen 
 
 The above code targets mobile and tablet users only and detaches a step that was linked to an element which is not visible. 
 
+= I have selected the skip a step option, yet the step still shows up. What is going on? =
+The skip a step option works only for elements that are hidden or off-screen but not for non-existent elements. If the element is missing from the DOM, the step should still appear in the middle of the screen and this is the standard behavior.
+However, you can still hide it with custom css. A valid use case for this is if you have extra content for logged in users and you want to hide the step that is linked to it for non logged in users.
+To do that, you need to do two things:
+
+1. go to plugin settings page => create a tour tab => custom css class and add a custom class name to the step you want to hide, lets say `my-hidden-step`:
+2. go to appearance => customize => additional css and add the following code:
+
+    .shepherd-enabled.my-hidden-step {
+        visibility: hidden;
+    }
+    .logged-in .my-hidden-step {
+        visibility: visible;
+    }
+
+The above code will hide the step for non-logged in users but still show it to logged in users.
+
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
 
