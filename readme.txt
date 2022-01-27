@@ -7,7 +7,7 @@ Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: 1.0.9
 License: GPLv2
 
@@ -92,7 +92,7 @@ The above code will hide the step for non-logged in users but still show it to l
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
 
 = Can I run the tour inside the WP Admin? =
-No, the scope of this plugin is the site frontend only.
+No, the scope of this plugin is the site frontend only. To display a tour in the CMS, you can try the [Custom Welcome Guide](https://wordpress.org/plugins/custom-welcome-guide/) plugin.
 
 = Can I customize the tour beyond the existing options?
 You can override the plugin's default js file and enqueue your own:
