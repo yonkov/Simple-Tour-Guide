@@ -285,18 +285,18 @@ function simple_tour_guide_get_steps_count() {
 function simple_tour_guide_get_escaped_tour_object_input() {
 	$tour_object = get_option( 'stg_tour' );
 	// if ( ! empty( $tour_object ) ) {
-	// 	return array_map( 'esc_attr', $tour_object );
+	// return array_map( 'esc_attr', $tour_object );
 	// }
-
-	foreach ($tour_object as $key => $value) {
-		if(substr($key, 0) !== "description"){
-			$tour_object[$key]== esc_attr($tour_object[$key]);
+	if ( ! empty( $tour_object ) ) {
+		foreach ( $tour_object as $key => $value ) {
+			if ( substr( $key, 0 ) !== 'description' ) {
+				$tour_object[ $key ] == esc_attr( $tour_object[ $key ] );
+			} else {
+				$tour_object[ $key ] == wp_kses_post( $tour_object[ $key ] );
+			}
 		}
-		else{
-			$tour_object[$key]== wp_kses_post($tour_object[$key]);
-		}
+		return $tour_object;
 	}
-	return  $tour_object;
 }
 
 /**
@@ -426,6 +426,6 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 }
 // enqueue wp editor scripts
 if ( ! class_exists( '_WP_Editors', false ) ) {
-    require( ABSPATH . WPINC . '/class-wp-editor.php' );
+	require ABSPATH . WPINC . '/class-wp-editor.php';
 }
 add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'print_default_editor_scripts' ) );
