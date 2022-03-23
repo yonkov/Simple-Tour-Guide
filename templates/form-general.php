@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<label for="stg_settings[show_confirmation]"><?php esc_html_e('Ask for confirmation when the user clicks the close button.', 'simple-tour-guide')?></label>
 	<br>
 	<input name="stg_settings[show_wp_editor]" type="checkbox" value="true" <?php checked( 'true', isset ($options['show_wp_editor']) ? $options['show_wp_editor'] : '',  true ); ?> />
-	<label for="stg_settings[show_wp_editor]"><?php esc_html_e('Enable TinyMCE HTML editor for the step creation.', 'simple-tour-guide')?></label>
+	<label for="stg_settings[show_wp_editor]"><?php esc_html_e('Enable TinyMCE HTML editor for easier step creation.', 'simple-tour-guide')?></label>
 	<br>
 	<input name="stg_settings[show_user_logged_in]" type="hidden" value=""<?php checked( 'true', isset ($options['show_user_logged_in']) ? $options['show_user_logged_in'] : '' ,  true ); ?> />
 	<input name="stg_settings[show_user_logged_in]" type="checkbox" value="true" <?php checked( 'true', isset ($options['show_user_logged_in']) ? $options['show_user_logged_in'] : '',  true ); ?> />

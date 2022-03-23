@@ -74,14 +74,14 @@ function simple_tour_guide_admin_scripts_and_styles() {
 	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), SIMPLE_TOUR_GUIDE_VERSION, true );
 	$script_params = array(
 		'counter'        => simple_tour_guide_get_steps_count(),
-		'show_wp_editor' => simple_tour_guide_is_use_wp_editor(),
+		'show_wp_editor' => simple_tour_guide_is_enqueue_editor(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 	
 	// Plugin settings page style
 	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', SIMPLE_TOUR_GUIDE_VERSION );
 	// // WP editor
-	if(simple_tour_guide_is_use_wp_editor()){
+	if(simple_tour_guide_is_enqueue_editor()){
 		wp_enqueue_editor();
 	}
 	// Iris color picker
@@ -415,6 +415,6 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 	}
 }
 
-function simple_tour_guide_is_use_wp_editor(){
-	return ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? true : false;
+function simple_tour_guide_is_enqueue_editor(){
+	return function_exists('wp_enqueue_editor') && ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? 1 : 0;
 }

@@ -23,13 +23,11 @@
 .step {
     border-bottom: 25px solid transparent;
 }
-.stg-table .mce-btn.mce-active button,
-.stg-table .mce-btn.mce-active:hover button,
-.stg-table .mce-btn.mce-active i,
-.stg-table .mce-btn.mce-active:hover i,
-.stg-table .mce-btn.mce-active i, 
-.stg-table .mce-btn.mce-active:hover i {
-    color: #000;
+.mce-btn.mce-active button,
+.mce-btn.mce-active:hover button,
+.mce-btn.mce-active i,
+.mce-btn.mce-active:hover i {
+    color: #000 !important;
 }
 @media (min-width: 80em) {
     .stg-table .form-field,

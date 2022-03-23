@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'textarea_rows' => 5,
 						'tinymce'       => $tinymce_options,
 					);
-					if ( version_compare( $GLOBALS['wp_version'], '4.9', '>=' ) && simple_tour_guide_is_use_wp_editor() ) :
+					if ( simple_tour_guide_is_enqueue_editor() ) :
 						?>
 					<td><?php wp_editor( wp_kses_post( $content ), 'id' . $step, $settings ); ?></td>
 					<?php else : ?>
