@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.0.9
+ * Version: 1.1.0
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.0.9' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.0' );
 
 /**
  * Enqueue scripts and styles.
@@ -284,9 +284,19 @@ function simple_tour_guide_get_steps_count() {
  */
 function simple_tour_guide_get_escaped_tour_object_input() {
 	$tour_object = get_option( 'stg_tour' );
-	if ( ! empty( $tour_object ) ) {
-		return array_map( 'esc_attr', $tour_object );
+	// if ( ! empty( $tour_object ) ) {
+	// 	return array_map( 'esc_attr', $tour_object );
+	// }
+
+	foreach ($tour_object as $key => $value) {
+		if(substr($key, 0) !== "description"){
+			$tour_object[$key]== esc_attr($tour_object[$key]);
+		}
+		else{
+			$tour_object[$key]== wp_kses_post($tour_object[$key]);
+		}
 	}
+	return  $tour_object;
 }
 
 /**
@@ -347,7 +357,7 @@ function simple_tour_guide_sanitize( $options ) {
 			$options[ 'title_' . $step ] = sanitize_text_field( $options[ 'title_' . $step ] );
 		}
 		if ( ! empty( $options[ 'description_' . $step ] ) ) {
-			$options[ 'description_' . $step ] = sanitize_text_field( $options[ 'description_' . $step ] );
+			$options[ 'description_' . $step ] = wp_kses_post( $options[ 'description_' . $step ] );
 		}
 		if ( ! empty( $options[ 'location_' . $step ] ) ) {
 			$options[ 'location_' . $step ] = sanitize_text_field( $options[ 'location_' . $step ] );
@@ -414,3 +424,8 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 		}
 	}
 }
+// enqueue wp editor scripts
+if ( ! class_exists( '_WP_Editors', false ) ) {
+    require( ABSPATH . WPINC . '/class-wp-editor.php' );
+}
+add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'print_default_editor_scripts' ) );

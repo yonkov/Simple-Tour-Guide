@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.9
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -109,6 +109,9 @@ In this way, you will be able to create your own custom tour and get access to a
 Happy Coding!
 
 == Changelog ==
+= 1.1.0 =
+* Add option to add html to steps.
+
 = 1.0.9 =
 * Fix tour dismisal and validate classnames
 

@@ -37,7 +37,7 @@
         const stgStepLocation = tourObj[`location_${i + 1}`];
         stgStepLocations[i] = stgStepLocation;
 
-        const stgStepClassname = tourObj[`classname_${i + 1}`];
+        const stgStepClassname = tourObj[`classname_${i + 1}`] || '';
         stgStepClassnames[i] = stgStepClassname.startsWith('.') ? stgStepClassname.substring(1) : stgStepClassname;
     }
 

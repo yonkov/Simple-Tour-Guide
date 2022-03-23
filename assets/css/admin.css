@@ -24,12 +24,12 @@
     border-bottom: 25px solid transparent;
 }
 @media (min-width:80em){
-    .stg-table .form-field {
+    .stg-table .form-field, .stg-table .wp-editor-wrap {
         width: 60%;
     }
 }
 @media (min-width:100em){
-    .stg-table .form-field {
+    .stg-table .form-field, .stg-table .wp-editor-wrap {
         width: 40%;
     }
 }

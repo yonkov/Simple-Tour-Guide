@@ -22,3 +22,8 @@
     border: none;
     color: hsla(0, 0%, 50.2%, 0.75) !important;
 }
+.shepherd-text::after {
+    clear: both;
+    display: table;
+    content: '';
+  }
