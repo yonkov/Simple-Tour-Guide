@@ -1,10 +1,10 @@
 .stg-buttons .button-secondary {
     min-width: 10em;
-    text-indent: .5em;
+    text-indent: 0.5em;
 }
 .stg-buttons .dashicons {
     position: relative;
-    top: .3em;
+    top: 0.3em;
 }
 .stg-buttons .dashicons-no {
     color: #aa0000;
@@ -23,13 +23,21 @@
 .step {
     border-bottom: 25px solid transparent;
 }
-@media (min-width:80em){
-    .stg-table .form-field, .stg-table .wp-editor-wrap {
+.stg-table .mce-btn.mce-active button,
+.stg-table .mce-btn.mce-active:hover button,
+.stg-table .mce-btn.mce-active i,
+.stg-table .mce-btn.mce-active:hover i {
+    color: #000;
+}
+@media (min-width: 80em) {
+    .stg-table .form-field,
+    .stg-table .wp-editor-wrap {
         width: 60%;
     }
 }
-@media (min-width:100em){
-    .stg-table .form-field, .stg-table .wp-editor-wrap {
+@media (min-width: 100em) {
+    .stg-table .form-field,
+    .stg-table .wp-editor-wrap {
         width: 40%;
     }
 }

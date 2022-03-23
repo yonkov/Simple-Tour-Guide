@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$tour_options = get_option( 'stg_tour' );
 	?>
 	<h3><?php esc_html_e( 'Add a Tour', 'simple-tour-guide' ); ?></h3>
-	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
+	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and add additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
 	<table class="form-table stg-table">
 		<?php
 		for ( $step = 1; $step <= $steps; $step++ ) :
@@ -25,16 +25,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="<?php echo esc_attr( 'stg_tour[description_' . $step . ']' ); ?>"><?php esc_html_e( 'Step Description', 'simple-tour-guide' ); ?></label></th>
 					<?php
-					$content  = isset( $tour_options[ 'description_' . $step ] ) ? $tour_options[ 'description_' . $step ] : '';
-					$settings = array(
+					$content         = isset( $tour_options[ 'description_' . $step ] ) ? $tour_options[ 'description_' . $step ] : '';
+					$tinymce_options = array(
+						'plugins'              => 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
+						'wordpress_adv_hidden' => false,
+						'toolbar1'             => 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
+						'toolbar2'             => 'formatselect forecolor link unlink',
+					);
+					$settings        = array(
 						'textarea_name' => esc_attr( 'stg_tour[description_' . $step . ']' ),
 						'editor_class'  => 'form-field',
 						'wpautop'       => false,
 						'textarea_rows' => 5,
+						'tinymce'       => $tinymce_options,
 					);
-					if ( version_compare( $GLOBALS['wp_version'], '4.9', '>=' ) ) :
+					if ( version_compare( $GLOBALS['wp_version'], '4.9', '>=' ) && simple_tour_guide_is_use_wp_editor() ) :
 						?>
-					<td><?php wp_editor( wp_kses_post( $content ), $step -1, $settings ); ?></td>
+					<td><?php wp_editor( wp_kses_post( $content ), 'id' . $step, $settings ); ?></td>
 					<?php else : ?>
 					<td><textarea class="form-field" name="<?php echo esc_attr( 'stg_tour[description_' . $step . ']' ); ?>" rows="5" cols="50"><?php echo esc_html( $content ); ?></textarea></td>
 					<?php endif; ?>

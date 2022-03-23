@@ -1,8 +1,11 @@
 (function () {
 
     let counter = +scriptParams.counter;
-
+    const isShowWpEditor = scriptParams.show_wp_editor;
+    console.log(isShowWpEditor);
     const table = document.getElementsByTagName('table')[0];
+
+    let newId ='';
 
     function addNewStep() {
         //get all steps
@@ -11,8 +14,9 @@
 
         // get last step input fields
         const lastStepFields = lastStep.getElementsByClassName('form-field');
+        
         // remove wp editor from last step to be able to copy it
-        if (typeof wp.editor != "undefined"){
+        if (typeof wp.editor != "undefined" && isShowWpEditor){
             wp.editor.remove(lastStepFields[1].id);
         }
 
@@ -37,36 +41,34 @@
             else if (i == 1) {
                 field.name = "stg_tour[description_" + counter + ']';
                 field.value = '';
-                field.id = +field.id + 1;
+                // increment textarea id to match it with the wp editor screen
+                newId = +(field.id.replace('id','')) + 1;
 
                 //reapply the wp editor
-                if (typeof wp.editor != "undefined"){
-                    wp.editor.initialize(field.id - 1, {
-                        tinymce: {
-                            wpautop: false,
-                            plugins: 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
-                            toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
-                            toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help',
-                            textarea_rows : 5
-                        },
-                        quicktags: true,
-                        mediaButtons: true,
-    
-                    });
-                    
+                if (typeof wp.editor != "undefined" && isShowWpEditor){
                     wp.editor.initialize(field.id, {
                         tinymce: {
-                            wpautop: false,
-                            plugins: 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
-                            toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
-                            toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help',
+                            plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
+                            toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
+                            toolbar2: 'formatselect forecolor link unlink',
                             textarea_rows : 5
                         },
                         quicktags: true,
                         mediaButtons: true,
     
                     });
-    
+
+                    field.id = 'id' + newId;
+                    wp.editor.initialize(field.id, {
+                        tinymce: {
+                            plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
+                            toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
+                            toolbar2: 'formatselect forecolor link unlink',
+                            textarea_rows : 5
+                        },
+                        quicktags: true,
+                        mediaButtons: true,
+                    });
                 }
 
             }

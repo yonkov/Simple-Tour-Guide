@@ -73,15 +73,20 @@ function simple_tour_guide_admin_scripts_and_styles() {
 	// Plugin settings page script
 	wp_enqueue_script( 'simple-tour-guide-admin-handle', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', array( 'jquery' ), SIMPLE_TOUR_GUIDE_VERSION, true );
 	$script_params = array(
-		'counter' => simple_tour_guide_get_steps_count(),
+		'counter'        => simple_tour_guide_get_steps_count(),
+		'show_wp_editor' => simple_tour_guide_is_use_wp_editor(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
+	
 	// Plugin settings page style
 	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', SIMPLE_TOUR_GUIDE_VERSION );
+	// // WP editor
+	if(simple_tour_guide_is_use_wp_editor()){
+		wp_enqueue_editor();
+	}
 	// Iris color picker
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'simple-tour-guide-color-picker', plugin_dir_url( __FILE__ ) . 'assets/js/color-picker.js', array( 'wp-color-picker' ), false, true );
-
 }
 add_action( 'admin_enqueue_scripts', 'simple_tour_guide_admin_scripts_and_styles' );
 
@@ -171,6 +176,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'simple_tour_g
 function simple_tour_guide_setup_sections() {
 	$steps   = simple_tour_guide_get_steps_count();
 	$options = array();
+	$link    = get_admin_url() . 'options-general.php?page=simple_tour_guide';
 	for ( $step = 1; $step <= $steps; $step++ ) {
 
 		$title       = 'title_' . $step;
@@ -180,7 +186,7 @@ function simple_tour_guide_setup_sections() {
 
 		$tour_step = array(
 			$title       => __( 'Welcome Aboard!', 'simple-tour-guide' ),
-			$description => __( "Thank you for using Simple Tour Guide plugin. To customize this tour and add more steps, go to the plugin's settings page.", 'simple-tour-guide' ),
+			$description => __( 'Thank you for using Simple Tour Guide plugin. To customize this tour and add more steps, go to the', 'simple-tour-guide' ) . '<a href="' . esc_url( $link ) . '">' . __( ' plugin\'s settings page.', 'simple-tour-guide' ) . '</a>',
 			$location    => '',
 			$classname   => 'my-awesome-class',
 		);
@@ -200,6 +206,7 @@ function simple_tour_guide_setup_sections() {
 		'show_intro'          => true,
 		'show_confirmation'   => '',
 		'show_modal'          => '',
+		'show_wp_editor'      => '',
 		'skip_step'           => '',
 		'show_on_all_pages'   => true,
 		'show_progress'       => true,
@@ -225,7 +232,7 @@ function simple_tour_guide_setup_sections() {
 	);
 }
 
-add_action( 'admin_init', 'simple_tour_guide_setup_sections' );
+add_action( 'init', 'simple_tour_guide_setup_sections' );
 
 /**
  * Increment Steps and store step counter in the database
@@ -323,34 +330,17 @@ add_shortcode( 'stg_kef', 'simple_tour_guide_demo_shortcode' );
  */
 function simple_tour_guide_sanitize( $options ) {
 	$steps = simple_tour_guide_get_steps_count();
+
 	// Checkboxes
-	if ( ! empty( $options['show_intro'] ) ) {
-		$options['show_intro'] = 'true';
+	foreach ($options as $option) {
+		if ( ! empty( $options[$option] ) ) {
+			$options[$option] = true;
+		}
+		else {
+			$options[$option] = false;
+		}
 	}
 
-	if ( ! empty( $options['show_confirmation'] ) ) {
-		$options['show_confirmation'] = 'true';
-	}
-
-	if ( ! empty( $options['show_user_logged_in'] ) ) {
-		$options['show_user_logged_in'] = 'true';
-	}
-
-	if ( ! empty( $options['show_modal'] ) ) {
-		$options['show_modal'] = 'true';
-	}
-
-	if ( ! empty( $options['skip_step'] ) ) {
-		$options['skip_step'] = 'true';
-	}
-
-	if ( ! empty( $options['show_on_all_pages'] ) ) {
-		$options['show_on_all_pages'] = 'true';
-	}
-
-	if ( ! empty( $options['show_progress'] ) ) {
-		$options['show_progress'] = 'true';
-	}
 	// text input
 	for ( $step = 1; $step <= $steps; $step++ ) {
 		if ( ! empty( $options[ 'title_' . $step ] ) ) {
@@ -424,8 +414,7 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 		}
 	}
 }
-// enqueue wp editor scripts
-if ( ! class_exists( '_WP_Editors', false ) ) {
-	require ABSPATH . WPINC . '/class-wp-editor.php';
+
+function simple_tour_guide_is_use_wp_editor(){
+	return ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? true : false;
 }
-add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'print_default_editor_scripts' ) );
