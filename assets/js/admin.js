@@ -2,7 +2,6 @@
 
     let counter = +scriptParams.counter;
     const isShowWpEditor = scriptParams.show_wp_editor;
-    console.log(isShowWpEditor);
     const table = document.getElementsByTagName('table')[0];
 
     let newId ='';
