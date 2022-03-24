@@ -3,20 +3,18 @@
     let counter = +scriptParams.counter;
     const isShowWpEditor = scriptParams.show_wp_editor;
     const table = document.getElementsByTagName('table')[0];
-
-    let newId ='';
+    const steps = document.getElementsByClassName('step');
 
     function addNewStep() {
-        //get all steps
-        const steps = document.getElementsByClassName('step');
         const lastStep = steps[steps.length - 1];
 
         // get last step input fields
         const lastStepFields = lastStep.getElementsByClassName('form-field');
+        const lastTextArea = lastStepFields[1];
         
-        // remove wp editor from last step to be able to copy it
+        // remove wp editor from last step description field to be able to copy it
         if (typeof wp.editor != "undefined" && isShowWpEditor){
-            wp.editor.remove(lastStepFields[1].id);
+            wp.editor.remove(lastTextArea.id);
         }
 
         //new table body wrapper
@@ -29,7 +27,7 @@
 
         table.insertBefore(newStep, lastStep)
 
-        // loop through last step fields and provide unique ids
+        // loop through last step fields to increment ids
         for (let i = 0, n = lastStepFields.length; i < n; i++) {
             const field = lastStepFields[i];
             // set the id and name attribute
@@ -40,34 +38,16 @@
             else if (i == 1) {
                 field.name = "stg_tour[description_" + counter + ']';
                 field.value = '';
-                // increment textarea id to match it with the wp editor screen
-                newId = +(field.id.replace('id','')) + 1;
 
-                //reapply the wp editor
+                //generate the wp editor
                 if (typeof wp.editor != "undefined" && isShowWpEditor){
-                    wp.editor.initialize(field.id, {
-                        tinymce: {
-                            plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
-                            toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
-                            toolbar2: 'formatselect forecolor link unlink',
-                            textarea_rows : 5
-                        },
-                        quicktags: true,
-                        mediaButtons: true,
-    
-                    });
 
-                    field.id = 'id' + newId;
-                    wp.editor.initialize(field.id, {
-                        tinymce: {
-                            plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
-                            toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
-                            toolbar2: 'formatselect forecolor link unlink',
-                            textarea_rows : 5
-                        },
-                        quicktags: true,
-                        mediaButtons: true,
-                    });
+                    generateWpEditor(field.id);
+
+                    // increment textarea id
+                    field.id = 'id_' + counter;
+
+                    generateWpEditor(field.id);
                 }
 
             }
@@ -80,13 +60,27 @@
                 field.value = '';
             }
         }
-
     }
 
     function removeStep() {
-        const steps = document.getElementsByClassName('step');
-        const lastStep = steps[steps.length - 1];
-        lastStep.remove();
+        if(steps.length>1){
+            const lastStep = steps[steps.length - 1];
+            lastStep.remove();
+        }
+    }
+
+    // initializes wp editor dynamically
+    function generateWpEditor(id){
+        wp.editor.initialize(id, {
+            tinymce: {
+                plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
+                toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
+                toolbar2: 'formatselect removeformat forecolor link unlink',
+                textarea_rows : 5
+            },
+            quicktags: true,
+            mediaButtons: true,
+        });
     }
 
     //clean up storage on form submit for a smoother user experience
@@ -97,38 +91,33 @@
     }
 
     //increment counter
-    jQuery('#stg_steps').click(function (e) {
+    document.getElementById('stg_steps').addEventListener('click',function (e) {
         e.preventDefault();
-        jQuery.ajax({
-            url: ajaxurl,
-            data: {
-                action: 'increment_counter',
-            },
-            type: 'POST',
-        })
-            .done(addNewStep)
-            .fail(function (xhr) {
-                console.log(xhr);
-            })
         counter++;
+        addNewStep();
         localStorage.removeItem('tour-guide');
     });
 
     //decrement counter
-    jQuery('#stg_remove_steps').click(function (e) {
+    document.getElementById('stg_remove_steps').addEventListener('click',function (e) {
         e.preventDefault();
+        removeStep();
+        if(counter>1){
+            counter--;
+        }
+    });
+
+    jQuery('.stg-form').submit(function (e) {
         jQuery.ajax({
             url: ajaxurl,
+            dataType: "json",
             data: {
-                action: 'decrement_counter',
+                action: 'save_counter',
+                'counter' : counter,
             },
-            type: 'POST',
+            type: 'post',
+            async: false
         })
-            .done(removeStep)
-            .fail(function (xhr) {
-                console.log(xhr);
-            })
-        counter--;
     });
 
 })();

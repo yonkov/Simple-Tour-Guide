@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<form class="stg-form" method="post" action="options.php">
+<form name="stgForm" class="stg-form" method="post" action="options.php">
 	<?php
 	settings_fields( 'simple_tour_guide_fields' );
 	$tour_options = get_option( 'stg_tour' );
@@ -15,8 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and add additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
 	<table class="form-table stg-table">
 		<?php
-		for ( $step = 1; $step <= $steps; $step++ ) :
-			?>
+		for ( $step = 1; $step <= $steps; $step++ ) : ?>
 			<tbody class="step">
 				<tr valign="top">
 					<th scope="row"><label for="<?php echo esc_attr( 'stg_tour[title_' . $step . ']' ); ?>"><?php esc_html_e( 'Step Title', 'simple-tour-guide' ); ?><span class="required">*</span></label></th>
@@ -30,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'plugins'              => 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
 						'wordpress_adv_hidden' => false,
 						'toolbar1'             => 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
-						'toolbar2'             => 'formatselect forecolor link unlink',
+						'toolbar2'             => 'formatselect forecolor removeformat link unlink',
 					);
 					$settings        = array(
 						'textarea_name' => esc_attr( 'stg_tour[description_' . $step . ']' ),
@@ -39,9 +38,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'textarea_rows' => 5,
 						'tinymce'       => $tinymce_options,
 					);
-					if ( simple_tour_guide_is_enqueue_editor() ) :
-						?>
-					<td><?php wp_editor( wp_kses_post( $content ), 'id' . $step, $settings ); ?></td>
+					if ( simple_tour_guide_is_enqueue_editor() ) : ?>
+					<td><?php wp_editor( wp_kses_post( $content ), 'id_' . $step, $settings ); ?></td>
 					<?php else : ?>
 					<td><textarea class="form-field" name="<?php echo esc_attr( 'stg_tour[description_' . $step . ']' ); ?>" rows="5" cols="50"><?php echo esc_html( $content ); ?></textarea></td>
 					<?php endif; ?>

@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.0' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.1' );
 
 /**
  * Enqueue scripts and styles.
@@ -77,11 +77,11 @@ function simple_tour_guide_admin_scripts_and_styles() {
 		'show_wp_editor' => simple_tour_guide_is_enqueue_editor(),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
-	
+
 	// Plugin settings page style
 	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', SIMPLE_TOUR_GUIDE_VERSION );
 	// // WP editor
-	if(simple_tour_guide_is_enqueue_editor()){
+	if ( simple_tour_guide_is_enqueue_editor() ) {
 		wp_enqueue_editor();
 	}
 	// Iris color picker
@@ -254,8 +254,8 @@ function simple_tour_guide_increment_counter() {
 	return $options;
 }
 
-add_action( 'wp_ajax_increment_counter', 'simple_tour_guide_increment_counter' );
-add_action( 'wp_ajax_nopriv_increment_counter', 'simple_tour_guide_increment_counter' );
+// add_action( 'wp_ajax_increment_counter', 'simple_tour_guide_increment_counter' );
+// add_action( 'wp_ajax_nopriv_increment_counter', 'simple_tour_guide_increment_counter' );
 
 function simple_tour_guide_decrement_counter() {
 	// Name of the option
@@ -269,8 +269,30 @@ function simple_tour_guide_decrement_counter() {
 
 }
 
-add_action( 'wp_ajax_decrement_counter', 'simple_tour_guide_decrement_counter' );
-add_action( 'wp_ajax_nopriv_decrement_counter', 'simple_tour_guide_decrement_counter' );
+// add_action( 'wp_ajax_decrement_counter', 'simple_tour_guide_decrement_counter' );
+// add_action( 'wp_ajax_nopriv_decrement_counter', 'simple_tour_guide_decrement_counter' );
+
+
+function simple_tour_guide_save_counter() {
+	// get ajax data
+	$counter = $_REQUEST['counter'];
+	// Name of the option
+	$option_name = 'stg_steps';
+	// Check if the option is set already
+	if ( get_option( $option_name ) !== false ) {
+		// sanitize and update the option
+		update_option( $option_name, absint( $counter ) );
+	} else {
+		// The option hasn't been created yet, so add it with $autoload set to 'no'.
+		$deprecated = null;
+		$autoload   = 'no';
+		add_option( $option_name, 2, $deprecated, $autoload );
+	}
+	return $options;
+}
+
+add_action( 'wp_ajax_save_counter', 'simple_tour_guide_save_counter' );
+add_action( 'wp_ajax_nopriv_save_counter', 'simple_tour_guide_save_counter' );
 
 /**
  * Get the total number of "tour steps" from the database. Escape db output.
@@ -332,12 +354,11 @@ function simple_tour_guide_sanitize( $options ) {
 	$steps = simple_tour_guide_get_steps_count();
 
 	// Checkboxes
-	foreach ($options as $option) {
-		if ( ! empty( $options[$option] ) ) {
-			$options[$option] = true;
-		}
-		else {
-			$options[$option] = false;
+	foreach ( $options as $option ) {
+		if ( ! empty( $options[ $option ] ) ) {
+			$options[ $option ] = true;
+		} else {
+			$options[ $option ] = false;
 		}
 	}
 
@@ -415,6 +436,6 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 	}
 }
 
-function simple_tour_guide_is_enqueue_editor(){
-	return function_exists('wp_enqueue_editor') && ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? 1 : 0;
+function simple_tour_guide_is_enqueue_editor() {
+	return function_exists( 'wp_enqueue_editor' ) && ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? 1 : 0;
 }
