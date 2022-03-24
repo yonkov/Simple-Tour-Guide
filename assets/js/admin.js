@@ -108,12 +108,14 @@
     });
 
     jQuery('.stg-form').submit(function (e) {
+        nonce = jQuery(this).attr("data-nonce");
         jQuery.ajax({
             url: ajaxurl,
             dataType: "json",
             data: {
                 action: 'save_counter',
                 'counter' : counter,
+                 nonce: nonce
             },
             type: 'post',
             async: false

@@ -4,9 +4,12 @@
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} ?>
+} 
 
-<form name="stgForm" class="stg-form" method="post" action="options.php">
+$nonce = wp_create_nonce( 'stg_nonce' );
+?>
+
+<form name="stgForm" class="stg-form" method="post" data-nonce="<?php echo esc_attr($nonce)?>" action="options.php">
 	<?php
 	settings_fields( 'simple_tour_guide_fields' );
 	$tour_options = get_option( 'stg_tour' );

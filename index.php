@@ -235,45 +235,15 @@ function simple_tour_guide_setup_sections() {
 add_action( 'init', 'simple_tour_guide_setup_sections' );
 
 /**
- * Increment Steps and store step counter in the database
+ * Store step counter in the database
  */
-function simple_tour_guide_increment_counter() {
-	// Name of the option
-	$option_name = 'stg_steps';
-	// Check if the option is set already
-	if ( get_option( $option_name ) !== false ) {
-		$new_value = intval( get_option( $option_name ) ) + 1;
-		// sanitize and update the option
-		update_option( $option_name, absint( $new_value ) );
-	} else {
-		// The option hasn't been created yet, so add it with $autoload set to 'no'.
-		$deprecated = null;
-		$autoload   = 'no';
-		add_option( $option_name, 2, $deprecated, $autoload );
-	}
-	return $options;
-}
-
-// add_action( 'wp_ajax_increment_counter', 'simple_tour_guide_increment_counter' );
-// add_action( 'wp_ajax_nopriv_increment_counter', 'simple_tour_guide_increment_counter' );
-
-function simple_tour_guide_decrement_counter() {
-	// Name of the option
-	$option_name = 'stg_steps';
-	// Decrement the option if is set and bigger that one
-	if ( get_option( $option_name ) !== false && get_option( $option_name ) > 1 ) {
-		$new_value = intval( get_option( $option_name ) ) - 1;
-		// sanitize and update the option
-		update_option( $option_name, absint( $new_value ) );
-	}
-
-}
-
-// add_action( 'wp_ajax_decrement_counter', 'simple_tour_guide_decrement_counter' );
-// add_action( 'wp_ajax_nopriv_decrement_counter', 'simple_tour_guide_decrement_counter' );
-
 
 function simple_tour_guide_save_counter() {
+	// nonce check for an extra layer of security, the function will exit if it fails
+	?><script><?php echo $_REQUEST?></script><?php
+	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'stg_nonce' ) ) {
+		exit( 'Woof Woof Woof' );
+	}
 	// get ajax data
 	$counter = $_REQUEST['counter'];
 	// Name of the option
