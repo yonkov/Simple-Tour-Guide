@@ -91,7 +91,7 @@
     }
 
     //increment counter
-    document.getElementById('stg_steps').addEventListener('click',function (e) {
+    jQuery('#stg_steps').click(function (e) {
         e.preventDefault();
         counter++;
         addNewStep();
@@ -99,14 +99,14 @@
     });
 
     //decrement counter
-    document.getElementById('stg_remove_steps').addEventListener('click',function (e) {
+    jQuery('#stg_remove_steps').click(function (e) {
         e.preventDefault();
         removeStep();
         if(counter>1){
             counter--;
         }
     });
-
+    // store counter in db
     jQuery('.stg-form').submit(function (e) {
         nonce = jQuery(this).attr("data-nonce");
         jQuery.ajax({
