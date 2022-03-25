@@ -3,17 +3,18 @@
     let counter = +scriptParams.counter;
     const isShowWpEditor = scriptParams.show_wp_editor;
     const table = document.getElementsByTagName('table')[0];
-    const steps = document.getElementsByClassName('step');
+    const strings = scriptParams.strings;
 
     function addNewStep() {
+        const steps = document.getElementsByClassName('step');
         const lastStep = steps[steps.length - 1];
 
         // get last step input fields
         const lastStepFields = lastStep.getElementsByClassName('form-field');
         const lastTextArea = lastStepFields[1];
-        
+
         // remove wp editor from last step description field to be able to copy it
-        if (typeof wp.editor != "undefined" && isShowWpEditor){
+        if (typeof wp.editor != "undefined" && isShowWpEditor) {
             wp.editor.remove(lastTextArea.id);
         }
 
@@ -40,7 +41,7 @@
                 field.value = '';
 
                 //generate the wp editor
-                if (typeof wp.editor != "undefined" && isShowWpEditor){
+                if (typeof wp.editor != "undefined" && isShowWpEditor) {
 
                     generateWpEditor(field.id);
 
@@ -63,31 +64,33 @@
     }
 
     function removeStep() {
-        if(steps.length>1){
-            const lastStep = steps[steps.length - 1];
-            lastStep.remove();
+        const steps = document.getElementsByClassName('step');
+        if (steps.length > 1) {
+            const result = confirm(strings.removeMessage);
+            if (result) {
+                const lastStep = steps[steps.length - 1];
+                const lastTextArea = lastStep.getElementsByClassName('form-field')[1];
+                lastStep.remove();
+                if (typeof wp.editor != "undefined" && isShowWpEditor) {
+                    wp.editor.remove(lastTextArea.id);
+                }
+                counter--;
+            }
         }
     }
 
     // initializes wp editor dynamically
-    function generateWpEditor(id){
+    function generateWpEditor(id) {
         wp.editor.initialize(id, {
             tinymce: {
                 plugins: 'paste,lists,link,media,wordpress,wpeditimage,wpgallery,wpdialogs,wplink,textcolor,colorpicker',
                 toolbar1: 'bold italic underline strikethrough | blockquote bullist numlist | alignleft aligncenter alignright alignjustify',
                 toolbar2: 'formatselect removeformat forecolor link unlink',
-                textarea_rows : 5
+                textarea_rows: 5
             },
             quicktags: true,
             mediaButtons: true,
         });
-    }
-
-    //clean up storage on form submit for a smoother user experience
-    if (document.getElementsByClassName('stg-form').length > 0) {
-        document.getElementsByClassName('stg-form')[0].onsubmit = function onSubmit() {
-            localStorage.removeItem('tour-guide');
-        };
     }
 
     //increment counter
@@ -102,20 +105,19 @@
     jQuery('#stg_remove_steps').click(function (e) {
         e.preventDefault();
         removeStep();
-        if(counter>1){
-            counter--;
-        }
+        localStorage.removeItem('tour-guide');
     });
     // store counter in db
     jQuery('.stg-form').submit(function (e) {
+        localStorage.removeItem('tour-guide');
         nonce = jQuery(this).attr("data-nonce");
         jQuery.ajax({
             url: ajaxurl,
             dataType: "json",
             data: {
                 action: 'save_counter',
-                'counter' : counter,
-                 nonce: nonce
+                'counter': counter,
+                nonce: nonce
             },
             type: 'post',
             async: false

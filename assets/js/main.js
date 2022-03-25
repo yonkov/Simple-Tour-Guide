@@ -24,7 +24,7 @@
 
     const steps = [];  //Construct the steps
 
-    let isBack =false; //flag if back button is pressed
+    let isBack = false; //flag if back button is pressed
 
     // get the data and organize it into arrays
     for (i = 0; i < counter; i++) {
@@ -86,14 +86,14 @@
                 {
                     text: strings.back,
                     action() {
-                        isBack=true;
+                        isBack = true;
                         return this.back();
                     }
                 },
                 {
                     text: strings.next,
                     action() {
-                        isBack=false;
+                        isBack = false;
                         return this.next();
                     }
                 },
@@ -108,20 +108,20 @@
                 }
             ],
             beforeShowPromise: () => new Promise((resolve) => {
-                if(isSkipStep){
+                if (isSkipStep) {
                     const currentIndex = tour.steps.indexOf(tour.getCurrentStep());
-                    let currentStep ='';
+                    let currentStep = '';
                     setTimeout(() => {
                         currentStep = tour.steps[currentIndex].el;
                         if (currentStep.hasAttribute('data-popper-reference-hidden')) {
-                            if(!isBack){
+                            if (!isBack) {
                                 tour.next();
                             }
-                            else{
+                            else {
                                 tour.back();
                             }
                         }
-                    },750);
+                    }, 750);
                     resolve();
                 }
                 resolve();
@@ -161,13 +161,13 @@
 
     // Initiate the tour
     function initiateTour() {
-        if (!localStorage.getItem('tour-guide')){
+        if (!localStorage.getItem('tour-guide')) {
             tour.start();
-        } 
+        }
     }
     //Trigger the tour
-    if(isDisplayLoggedIn){
-        if (isloggedIn){
+    if (isDisplayLoggedIn) {
+        if (isloggedIn) {
             if (isDisplayAllPages) {
                 initiateTour()
             }

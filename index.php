@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.1' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.2' );
 
 /**
  * Enqueue scripts and styles.
@@ -75,6 +75,9 @@ function simple_tour_guide_admin_scripts_and_styles() {
 	$script_params = array(
 		'counter'        => simple_tour_guide_get_steps_count(),
 		'show_wp_editor' => simple_tour_guide_is_enqueue_editor(),
+		'strings'        => array(
+			'removeMessage' => __( 'Are you sure you want to delete this step?', 'simple-tour-guide' ),
+		),
 	);
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 
@@ -240,25 +243,27 @@ add_action( 'init', 'simple_tour_guide_setup_sections' );
 
 function simple_tour_guide_save_counter() {
 	// nonce check for an extra layer of security, the function will exit if it fails
-	?><script><?php echo $_REQUEST?></script><?php
-	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'stg_nonce' ) ) {
-		exit( 'Woof Woof Woof' );
-	}
-	// get ajax data
-	$counter = $_REQUEST['counter'];
-	// Name of the option
-	$option_name = 'stg_steps';
-	// Check if the option is set already
-	if ( get_option( $option_name ) !== false ) {
-		// sanitize and update the option
-		update_option( $option_name, absint( $counter ) );
-	} else {
-		// The option hasn't been created yet, so add it with $autoload set to 'no'.
-		$deprecated = null;
-		$autoload   = 'no';
-		add_option( $option_name, 2, $deprecated, $autoload );
-	}
-	return $options;
+	?>
+	<script><?php echo $_REQUEST; ?></script>
+					   <?php
+						if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'stg_nonce' ) ) {
+							exit( 'Woof Woof Woof' );
+						}
+						// get ajax data
+						$counter = $_REQUEST['counter'];
+						// Name of the option
+						$option_name = 'stg_steps';
+						// Check if the option is set already
+						if ( get_option( $option_name ) !== false ) {
+							// sanitize and update the option
+							update_option( $option_name, absint( $counter ) );
+						} else {
+							// The option hasn't been created yet, so add it with $autoload set to 'no'.
+							$deprecated = null;
+							$autoload   = 'no';
+							add_option( $option_name, 2, $deprecated, $autoload );
+						}
+						return $options;
 }
 
 add_action( 'wp_ajax_save_counter', 'simple_tour_guide_save_counter' );
