@@ -4,6 +4,8 @@
     const isShowWpEditor = scriptParams.show_wp_editor;
     const table = document.getElementsByTagName('table')[0];
     const strings = scriptParams.strings;
+    const addStepButton = document.getElementById('stg_steps') || '';
+    const removeStepButton = document.getElementById('stg_remove_steps') || '';
 
     function addNewStep() {
         const steps = document.getElementsByClassName('step');
@@ -79,7 +81,7 @@
         }
     }
 
-    // initializes wp editor dynamically
+    // helper to initialize wp editor dynamically
     function generateWpEditor(id) {
         wp.editor.initialize(id, {
             tinymce: {
@@ -93,22 +95,30 @@
         });
     }
 
-    //increment counter
-    jQuery('#stg_steps').click(function (e) {
-        e.preventDefault();
-        counter++;
-        addNewStep();
-        localStorage.removeItem('tour-guide');
-    });
+    //clean up storage on all forms for a smoother user experience
+    if (document.getElementsByClassName('stg-form').length > 0) {
+        document.getElementsByClassName('stg-form')[0].onsubmit = function onSubmit() {
+            localStorage.removeItem('tour-guide');
+        };
+    }
+    if(addStepButton){
+        addStepButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            counter++;
+            addNewStep();
+            localStorage.removeItem('tour-guide');
+        });
+    }
+    if(removeStepButton){
+        removeStepButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            removeStep();
+            localStorage.removeItem('tour-guide');
+        });
+    }
 
-    //decrement counter
-    jQuery('#stg_remove_steps').click(function (e) {
-        e.preventDefault();
-        removeStep();
-        localStorage.removeItem('tour-guide');
-    });
-    // store counter in db
-    jQuery('.stg-form').submit(function (e) {
+    // store counter in db before submitting the form
+    jQuery('form[name="stgFormOne"]').submit(function (e) {
         localStorage.removeItem('tour-guide');
         nonce = jQuery(this).attr("data-nonce");
         jQuery.ajax({
