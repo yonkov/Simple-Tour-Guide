@@ -21,6 +21,10 @@
     border: none;
     color: hsla(0, 0%, 50.2%, 0.75) !important;
 }
+.shepherd-cancel-icon span{
+    position: relative;
+    top: -2px;
+}
 .shepherd-footer {
     align-items: center;
 }
