@@ -42,7 +42,7 @@ function simple_tour_guide_scripts_and_styles() {
 	wp_enqueue_style( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.css', '8.2.3' );
 	wp_enqueue_script( 'shepherd', plugin_dir_url( __FILE__ ) . 'assets/lib/shepherd.min.js', array(), '8.2.3', true );
 	// Plugin Options style
-	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', SIMPLE_TOUR_GUIDE_VERSION );
+	wp_enqueue_style( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/css/main.css', array(), SIMPLE_TOUR_GUIDE_VERSION );
 	// Plugin's main script for running the tour guide
 		wp_enqueue_script( 'simple-tour-guide', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array(), SIMPLE_TOUR_GUIDE_VERSION, true );
 	// pass plugin options
@@ -82,7 +82,7 @@ function simple_tour_guide_admin_scripts_and_styles() {
 	wp_localize_script( 'simple-tour-guide-admin-handle', 'scriptParams', $script_params );
 
 	// Plugin settings page style
-	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', SIMPLE_TOUR_GUIDE_VERSION );
+	wp_enqueue_style( 'simple-tour-guide-admin-style', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', array(), SIMPLE_TOUR_GUIDE_VERSION );
 	// // WP editor
 	if ( simple_tour_guide_is_enqueue_editor() ) {
 		wp_enqueue_editor();
