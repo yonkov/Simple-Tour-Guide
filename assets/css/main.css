@@ -1,14 +1,13 @@
 .shepherd-progress-bar {
     position: absolute;
     left: 2%;
-    bottom: 9%;
     font-size: 14px;
     border-radius: 9px;
     height: 20px;
     width: 100%;
     max-width: 175px;
     padding: 3px;
-    background: #e6e6e6
+    background: #e6e6e6;
 }
 .shepherd-progress-bar span {
     display: block;
@@ -22,8 +21,11 @@
     border: none;
     color: hsla(0, 0%, 50.2%, 0.75) !important;
 }
+.shepherd-footer {
+    align-items: center;
+}
 .shepherd-text::after {
     clear: both;
     display: table;
-    content: '';
-  }
+    content: "";
+}

@@ -4,12 +4,12 @@
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} 
+}
 
 $nonce = wp_create_nonce( 'stg_nonce' );
 ?>
 
-<form name="stgFormOne" class="stg-form" method="post" data-nonce="<?php echo esc_attr($nonce)?>" action="options.php">
+<form name="stgFormOne" class="stg-form" method="post" data-nonce="<?php echo esc_attr( $nonce ); ?>" action="options.php">
 	<?php
 	settings_fields( 'simple_tour_guide_fields' );
 	$tour_options = get_option( 'stg_tour' );
@@ -18,7 +18,8 @@ $nonce = wp_create_nonce( 'stg_nonce' );
 	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and add additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
 	<table class="form-table stg-table">
 		<?php
-		for ( $step = 1; $step <= $steps; $step++ ) : ?>
+		for ( $step = 1; $step <= $steps; $step++ ) :
+			?>
 			<tbody class="step">
 				<tr valign="top">
 					<th scope="row"><label for="<?php echo esc_attr( 'stg_tour[title_' . $step . ']' ); ?>"><?php esc_html_e( 'Step Title', 'simple-tour-guide' ); ?><span class="required">*</span></label></th>
@@ -41,7 +42,8 @@ $nonce = wp_create_nonce( 'stg_nonce' );
 						'textarea_rows' => 5,
 						'tinymce'       => $tinymce_options,
 					);
-					if ( simple_tour_guide_is_enqueue_editor() ) : ?>
+					if ( simple_tour_guide_is_enqueue_editor() ) :
+						?>
 					<td><?php wp_editor( wp_kses_post( $content ), 'id_' . $step, $settings ); ?></td>
 					<?php else : ?>
 					<td><textarea class="form-field" name="<?php echo esc_attr( 'stg_tour[description_' . $step . ']' ); ?>" rows="5" cols="50"><?php echo esc_html( $content ); ?></textarea></td>
