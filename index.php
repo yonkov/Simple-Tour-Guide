@@ -243,27 +243,24 @@ add_action( 'init', 'simple_tour_guide_setup_sections' );
 
 function simple_tour_guide_save_counter() {
 	// nonce check for an extra layer of security, the function will exit if it fails
-	?>
-	<script><?php echo $_REQUEST; ?></script>
-					   <?php
-						if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'stg_nonce' ) ) {
-							exit( 'Woof Woof Woof' );
-						}
-						// get ajax data
-						$counter = $_REQUEST['counter'];
-						// Name of the option
-						$option_name = 'stg_steps';
-						// Check if the option is set already
-						if ( get_option( $option_name ) !== false ) {
-							// sanitize and update the option
-							update_option( $option_name, absint( $counter ) );
-						} else {
-							// The option hasn't been created yet, so add it with $autoload set to 'no'.
-							$deprecated = null;
-							$autoload   = 'no';
-							add_option( $option_name, 2, $deprecated, $autoload );
-						}
-						return $options;
+	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'stg_nonce' ) ) {
+		exit( 'Woof Woof Woof' );
+	}
+	// get ajax data
+	$counter = $_REQUEST['counter'];
+	// Name of the option
+	$option_name = 'stg_steps';
+	// Check if the option is set already
+	if ( get_option( $option_name ) !== false ) {
+		// sanitize and update the option
+		update_option( $option_name, absint( $counter ) );
+	} else {
+		// The option hasn't been created yet, so add it with $autoload set to 'no'.
+		$deprecated = null;
+		$autoload   = 'no';
+		add_option( $option_name, 2, $deprecated, $autoload );
+	}
+	return $options;
 }
 
 add_action( 'wp_ajax_save_counter', 'simple_tour_guide_save_counter' );
