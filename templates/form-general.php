@@ -28,6 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input name="stg_settings[show_modal]" type="checkbox" value="true" <?php checked( 'true', isset ($options['show_modal']) ? $options['show_modal'] : '',  true ); ?> />
 	<label for="stg_settings[show_modal]"><?php esc_html_e('Show modal background overlay when the tour is active.', 'simple-tour-guide')?></label>
 	<br>
+	<input name="stg_settings[show_mobile]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_mobile'] ) ? 'true' : '', true ); ?> />
+	<label for="stg_settings[show_mobile]"><?php esc_html_e('Show tour on mobile', 'simple-tour-guide')?></label>
+	<br>
 	<input name="stg_settings[skip_step]" type="checkbox" value="true" <?php checked( 'true', isset ($options['skip_step']) ? $options['skip_step'] : '',  true ); ?> />
 	<label for="stg_settings[skip_step]"><?php esc_html_e('Skip a step if the step is attached to an element but the element is not visible.', 'simple-tour-guide')?></label>
 	<br>

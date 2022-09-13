@@ -16,6 +16,7 @@
     const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
     const isloggedIn = scriptParams.is_logged_in;
+    const isDisplayMobile = scriptParams.tour_settings.show_mobile;
 
     const stgStepTitles = [];
     const stgStepDescriptions = [];
@@ -25,6 +26,11 @@
     const steps = [];  //Construct the steps
 
     let isBack = false; //flag if back button is pressed
+
+    //early bail if the tour should not be visible on mobile
+    if(!isDisplayMobile && window.matchMedia("(max-width: 640px)").matches){
+        return;
+    }
 
     // get the data and organize it into arrays
     for (i = 0; i < counter; i++) {
@@ -165,6 +171,7 @@
             tour.start();
         }
     }
+
     //Trigger the tour
     if (isDisplayLoggedIn) {
         if (isloggedIn) {
