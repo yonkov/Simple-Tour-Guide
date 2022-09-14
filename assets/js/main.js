@@ -16,7 +16,7 @@
     const isDisplayProgress = scriptParams.tour_settings.show_progress;
     const isAdmin = scriptParams.tour_settings.is_admin;
     const isloggedIn = scriptParams.is_logged_in;
-    const isDisplayMobile = scriptParams.tour_settings.show_mobile;
+    const isHideMobile = scriptParams.tour_settings.hide_mobile;
 
     const stgStepTitles = [];
     const stgStepDescriptions = [];
@@ -28,7 +28,7 @@
     let isBack = false; //flag if back button is pressed
 
     //early bail if the tour should not be visible on mobile
-    if(!isDisplayMobile && window.matchMedia("(max-width: 640px)").matches){
+    if(isHideMobile && window.matchMedia("(max-width: 640px)").matches){
         return;
     }
 

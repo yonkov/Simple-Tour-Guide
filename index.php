@@ -211,12 +211,15 @@ function simple_tour_guide_setup_sections() {
 		'show_modal'          => '',
 		'show_wp_editor'      => '',
 		'skip_step'           => '',
-		'show_mobile'         => true,
+		'hide_mobile'         => '',
 		'show_on_all_pages'   => true,
 		'show_progress'       => true,
 		'show_user_logged_in' => '',
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
+
+
+
 	register_setting( // save tour settings
 		'simple_tour_guide_additional_fields',
 		'stg_settings',
