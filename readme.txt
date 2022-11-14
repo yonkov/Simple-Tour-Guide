@@ -7,7 +7,7 @@ Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: 1.1.3
 License: GPLv2
 
