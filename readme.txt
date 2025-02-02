@@ -7,8 +7,8 @@ Author URI: https://yonkov.github.io/
 Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
-Tested up to: 6.1
-Stable tag: 1.1.3
+Tested up to: 6.7
+Stable tag: 1.1.5
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -45,7 +45,7 @@ Go to "Tour Options" tab, uncheck "Show the tour on all pages" box and copy the 
 Go to "Style" tab and customize accordingly. For additional customizations, you can use the `.stg` classname or add a custom class to each step from the "Create a Tour" tab. Go to `Аppearance => Customize => Additional css` and add your own custom styles there.
 
 = Can I create more than one tour? =
-The plugin currently supports only one tour, however you can add an additional tour. Check [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) documentation on how to do it, as well as the last question in this section (you would need to add some custom code to make it work).
+In the pro version of the plugin, you can create unlimited tours. The free version supports only one tour.
 
 = Can I add a background overlay to disable the rest of the site while the tour is active? =
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
@@ -91,24 +91,22 @@ The above code will hide the step for non-logged in users but still show it to l
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
 
+= Can I open a tour with custom button? =
+Yes, in the pro version of the plugin, you can use a button with classname `stg-start-tour`
+
 = Can I run the tour inside the WP Admin? =
 No, the scope of this plugin is the site frontend only. To display a tour in the CMS, you can try the [Custom Welcome Guide](https://wordpress.org/plugins/custom-welcome-guide/) plugin.
 
-= Can I customize the tour beyond the existing options?
-You can override the plugin's default js file and enqueue your own:
-
-    function my_modified_tour() {
-        wp_dequeue_script( 'simple-tour-guide' );
-        wp_deregister_script( 'simple-tour-guide' );
-        wp_enqueue_script( 'custom-tour', get_stylesheet_directory_uri() . '/assets/js/custom-tour.js', array(), '', true );
-    }
-
-    add_action( 'wp_enqueue_scripts', 'my_modified_tour' );
-
-In this way, you will be able to create your own custom tour and get access to all the options provided by the [Shepherd.js](https://shepherdjs.dev/docs/tutorial-02-usage.html) library.
-Happy Coding!
+= Are there more options? =
+Check the [premium version of the plugin](https://nasiothemes.com/simple-tour-guide). By upgrading, you will get additional options, as well as access to priority support and updates.
 
 == Changelog ==
+= 1.1.5 =
+* Update logo and faq section.
+
+= 1.1.4 =
+* Update logo and docs.
+
 = 1.1.3 =
 * Add option to display the tour on desktop only.
 

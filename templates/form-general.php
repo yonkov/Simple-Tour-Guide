@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php $options = get_option( 'stg_settings' ); ?>
 	<h3><?php esc_html_e( 'Tour Options', 'simple-tour-guide' ); ?></h3>
 	<p><?php esc_html_e( 'The below settings apply for the whole tour. You can choose to display the tour until the user has completed or dismissed it or to display it on every page reload (ideal for testing purposes). You can also confirm tour cancellation when the user clicks the close button and display the tour only on specific pages.', 'simple-tour-guide' ); ?></p>
+	<?php printf( '<p><strong>' . esc_html__( 'More options - %s', 'simple-tour-guide' ) . '</strong></p>','<a href="' . esc_url( SIMPLE_TOUR_GUIDE_HOMEPAGE_URL ) . '" target="_blank" rel="noopener">' . esc_html__( 'Upgrade to pro.', 'simple-tour-guide' ) . '</a>' ); ?>
 	<input name="stg_settings[show_intro]" type="checkbox" value="true" <?php checked( 'true', isset( $options['show_intro'] ) ? 'true' : '', true ); ?> />
 	<label for="stg_settings[show_intro]"><?php esc_html_e('Show the tour only once. Hide it after the user finishes or dismisses it.', 'simple-tour-guide' ); ?></label>
 	<br>

@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.1.3
+ * Version: 1.1.5
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.3' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.5' );
+define( 'SIMPLE_TOUR_GUIDE_HOMEPAGE_URL', 'https://nasiothemes.com/simple-tour-guide' );
+define( 'SIMPLE_TOUR_GUIDE_PREMIUM_OPTIONS_URL', 'https://nasiothemes.com/simple-tour-guide#features' );
+define( 'SIMPLE_TOUR_GUIDE_VIDEO_URL', 'https://www.youtube.com/watch?v=nQziKjYraTU' );
 
 /**
  * Enqueue scripts and styles.
@@ -133,8 +136,10 @@ function simple_tour_guide_page_content_callback() {
 			<a href="?page=simple_tour_guide&tab=style"
 				class="nav-tab <?php echo $active_tab == 'style' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Style', 'simple-tour-guide' ); ?></a>
 			<a href="?page=simple_tour_guide&tab=faq"
-				class="nav-tab <?php echo $active_tab == 'style' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'FAQ', 'simple-tour-guide' ); ?></a>
-		</h2>
+				class="nav-tab <?php echo $active_tab == 'faq' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'FAQ', 'simple-tour-guide' ); ?></a>
+			<a href="?page=simple_tour_guide&tab=add_more_tours"
+				class="nav-tab <?php echo $active_tab == 'add_more_tours' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Add more tours', 'simple-tour-guide' ); ?><span class="stg-premium"><?php esc_html_e( 'Premium', 'simple-tour-guide' ); ?></span></a>
+			</h2>
 
 		<?php
 		switch ( $active_tab ) :
@@ -149,6 +154,9 @@ function simple_tour_guide_page_content_callback() {
 				break;
 			case 'faq':
 				include_once plugin_dir_path( __FILE__ ) . 'templates/faq.php';
+				break;
+			case 'add_more_tours':
+				include_once plugin_dir_path( __FILE__ ) . 'templates/add-more-tours.php';
 				break;
 		endswitch;
 		?>
@@ -217,8 +225,6 @@ function simple_tour_guide_setup_sections() {
 		'show_user_logged_in' => '',
 	);
 	add_option( 'stg_settings', $general_options ); // default settings
-
-
 
 	register_setting( // save tour settings
 		'simple_tour_guide_additional_fields',
@@ -415,3 +421,5 @@ if ( ! function_exists( 'simple_tour_guide_sanitize_hex_color' ) ) {
 function simple_tour_guide_is_enqueue_editor() {
 	return function_exists( 'wp_enqueue_editor' ) && ! empty( get_option( 'stg_settings' )['show_wp_editor'] ) ? 1 : 0;
 }
+
+require_once plugin_dir_path( __FILE__ ) . 'inc/admin.php';

@@ -16,6 +16,7 @@ $nonce = wp_create_nonce( 'stg_nonce' );
 	?>
 	<h3><?php esc_html_e( 'Add a Tour', 'simple-tour-guide' ); ?></h3>
 	<p><?php esc_html_e( 'Create a guided intro tour by adding steps to it here. Customize each step (you can add title, description, attach it to any dom element and add additional css class) to guide your visitors throughout your project. They will appreciate it.', 'simple-tour-guide' ); ?></p>
+	<?php printf( '<p><strong>' . esc_html__( 'Unlimited tours - %s', 'simple-tour-guide' ) . '</strong></p>','<a href="' . esc_url( SIMPLE_TOUR_GUIDE_HOMEPAGE_URL ) . '" target="_blank" rel="noopener">' . esc_html__( 'Upgrade to pro.', 'simple-tour-guide' ) . '</a>' ); ?>
 	<table class="form-table stg-table">
 		<?php
 		for ( $step = 1; $step <= $steps; $step++ ) :

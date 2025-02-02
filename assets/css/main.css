@@ -1,12 +1,12 @@
 .shepherd-progress-bar {
     position: absolute;
     left: 2%;
-    font-size: 14px;
-    border-radius: 9px;
-    height: 20px;
+    font-size: 0.875rem;
+    border-radius: 0.5625rem;
+    height: 1.25rem;
     width: 100%;
-    max-width: 175px;
-    padding: 3px;
+    max-width: 10.9375rem;
+    padding: 0.1875rem;
     background: #e6e6e6;
 }
 .shepherd-progress-bar span {
@@ -14,16 +14,16 @@
     background: #3288e6;
     width: 50%;
     height: 100%;
-    border-radius: 9px;
+    border-radius: 0.5625rem;
 }
 .shepherd-cancel-icon {
     background-color: transparent !important;
     border: none;
     color: hsla(0, 0%, 50.2%, 0.75) !important;
 }
-.shepherd-cancel-icon span{
+.shepherd-cancel-icon span {
     position: relative;
-    top: -2px;
+    top: -0.125rem;
 }
 .shepherd-footer {
     align-items: center;
@@ -32,4 +32,8 @@
     clear: both;
     display: table;
     content: "";
+}
+
+.stg {
+    max-width: 26rem;
 }
