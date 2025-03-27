@@ -5,10 +5,10 @@ function simple_tour_guide_call_to_action_markup() {
 	global $current_user;
 	$user_id         = $current_user->ID;
 
-	if ( ! get_user_meta( $user_id, 'stg_hide_admin_notice' ) ) :
+	if ( ! get_user_meta( $user_id, 'stg_banner_hide_admin_notice' ) ) :
 		?>
 	<div id="message" class="notice notice-success nasiothemes-notice stg-notice">
-		<a class="nasiothemes-message-close notice-dismiss" href="?stg_hide_admin_notice=0"></a>
+		<a class="nasiothemes-message-close notice-dismiss" href="?stg_banner_hide_admin_notice=0"></a>
 
 		<div class="nasiothemes-message-content">
 			<div class="nasiothemes-message-image">
@@ -56,8 +56,8 @@ function simple_tour_guide_dismiss_admin_notice() {
 	global $current_user;
 	$user_id = $current_user->ID;
 	
-	if ( isset( $_GET['stg_hide_admin_notice'] ) && '0' === $_GET['stg_hide_admin_notice'] ) {
-		add_user_meta( $user_id, 'stg_hide_admin_notice', 'true', true );
+	if ( isset( $_GET['stg_banner_hide_admin_notice'] ) && '0' === $_GET['stg_banner_hide_admin_notice'] ) {
+		add_user_meta( $user_id, 'stg_banner_hide_admin_notice', 'true', true );
 	}
 }
 add_action( 'admin_init', 'simple_tour_guide_dismiss_admin_notice' );

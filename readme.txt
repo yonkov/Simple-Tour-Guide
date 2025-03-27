@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 6.7
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -45,7 +45,7 @@ Go to "Tour Options" tab, uncheck "Show the tour on all pages" box and copy the 
 Go to "Style" tab and customize accordingly. For additional customizations, you can use the `.stg` classname or add a custom class to each step from the "Create a Tour" tab. Go to `Аppearance => Customize => Additional css` and add your own custom styles there.
 
 = Can I create more than one tour? =
-In the pro version of the plugin, you can create unlimited tours. The free version supports only one tour.
+In the [pro version](https://nasiothemes.com/simple-tour-guide) of the plugin, you can create unlimited tours. The free version supports only one tour.
 
 = Can I add a background overlay to disable the rest of the site while the tour is active? =
 Yes, this feature is available since version 1.03. All you need to do is check the option "Show modal background overlay when the tour is active" in the Tour options tab. This will disable any site interaction until the user has finished or dismissed the tour.
@@ -91,8 +91,8 @@ The above code will hide the step for non-logged in users but still show it to l
 = Can I show the tour to logged in users only? =
 Since version 1.02 you can! You can check the option "Show the tour to logged in users only" in the Tour Options tab.
 
-= Can I open a tour with custom button? =
-Yes, in the pro version of the plugin, you can use a button with classname `stg-start-tour`
+= Can I open a tour with a custom button? =
+Yes, in the [pro version](https://nasiothemes.com/simple-tour-guide) of the plugin, you can use a button with classname `stg-start-tour`
 
 = Can I run the tour inside the WP Admin? =
 No, the scope of this plugin is the site frontend only. To display a tour in the CMS, you can try the [Custom Welcome Guide](https://wordpress.org/plugins/custom-welcome-guide/) plugin.
@@ -101,10 +101,13 @@ No, the scope of this plugin is the site frontend only. To display a tour in the
 Check the [premium version of the plugin](https://nasiothemes.com/simple-tour-guide). By upgrading, you will get additional options, as well as access to priority support and updates.
 
 == Changelog ==
-= 1.1.5 =
+= 1.1.6 - March 2025 =
+* Update Docs.
+
+= 1.1.5 - February 2025 =
 * Update logo and faq section.
 
-= 1.1.4 =
+= 1.1.4 - February 2025 =
 * Update logo and docs.
 
 = 1.1.3 =
