@@ -21,20 +21,12 @@ function simple_tour_guide_call_to_action_markup() {
 			</div>
 
 			<div class="nasiothemes-message-text">
-				<h2 class="nasiothemes-message-heading"><?php echo esc_html__( 'The long-awaited Simple Tour Guide Pro is now available!', 'simple-tour-guide' ); ?> 🚀</h2> 
+				<h2 class="nasiothemes-message-heading"><?php echo esc_html__( 'Simple Tour Guide Pro is now available!', 'simple-tour-guide' ); ?> 🚀</h2> 
 				<?php 
 				echo '<p>';
-					/* translators: %1$s link */
-					printf( __( 'Unlimited tours, custom events based on user interaction, more options and premium support - <a target="_blank" href="%1$s">Get started with Simple Tour Guide Pro</a>.', 'simple-tour-guide' ), esc_url( SIMPLE_TOUR_GUIDE_HOMEPAGE_URL ) );
+					/* translators: %1$s is a line break, %2$s is a link */
+					printf( __( 'Unlimited tours, start tour on link click, different tours based on user authentication,%1$smore options and premium support - %2$s.', 'simple-tour-guide' ), '<br>', '<a target="_blank" href="' . esc_url( SIMPLE_TOUR_GUIDE_HOMEPAGE_URL ) . '">' . esc_html__( 'Get started with Simple Tour Guide Pro', 'simple-tour-guide' ) . '</a>' );
 				echo '</p>';
-
-				// Bonus message
-				echo '<div class="stg-bonus-message">';
-				echo '<p class="nasiothemes-bonus-text"><span>🎁</span> <strong>' . esc_html__( 'Bonus:', 'simple-tour-guide' ) . ' </strong> ';
-				echo esc_html__( 'Upgrade to the Pro plan today and', 'simple-tour-guide' ) . ' ';
-				echo '<strong> ' . esc_html__( 'save 20% off', 'simple-tour-guide' ) . ' </strong> ';
-				printf('(' . esc_html__( 'use coupon code %s on checkout', 'simple-tour-guide' ) . ').','<code>stg20</code>' );
-				echo '</p></div>';
 
 				echo '<p class="notice-buttons"><a href="' . esc_url( SIMPLE_TOUR_GUIDE_HOMEPAGE_URL ) . '" target="_blank" rel="noopener" class="button button-primary nasiothemes-button"><span class="dashicons dashicons-cart"></span>';
 				echo esc_html__( 'Upgrade to Pro', 'simple-tour-guide' );

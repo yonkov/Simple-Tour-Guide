@@ -49,10 +49,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<a href="<?php echo esc_url(SIMPLE_TOUR_GUIDE_HOMEPAGE_URL)?>" target="_blank"><?php esc_html_e( 'Unlock Unlimited Tours', 'simple-tour-guide-pro' ); ?></a>
 		<a href="<?php echo esc_url(SIMPLE_TOUR_GUIDE_PREMIUM_OPTIONS_URL)?>" target="_blank" class="learn-more"><?php esc_html_e( 'Compare Free vs Pro', 'simple-tour-guide-pro' ); ?></a>
 	</div>
-	<div class="bonus-alert">🎁 <span>
-		<strong><?php esc_html_e( 'Bonus:', 'simple-tour-guide-pro' ); ?></strong>
-		<?php esc_html_e( 'Upgrade to the Pro plan today and ', 'simple-tour-guide-pro' ); ?>
-		<strong><?php esc_html_e( 'save 20% off', 'simple-tour-guide-pro' ); ?></strong>
-		<?php printf( '(' . esc_html__( 'use coupon code %s on checkout', 'simple-tour-guide' ) . ').', '<code>stg20</code>' ); ?></span>
-	</div>
 </div>
