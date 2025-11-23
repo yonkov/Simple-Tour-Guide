@@ -8,7 +8,7 @@ Author: Atanas Yonkov
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 6.8
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 License: GPLv2
 
 Easily add an interactive step-by-step user guide (intro tour) for your visitors. Based on Shepherd.js (https://shepherdjs.dev/).
@@ -101,6 +101,9 @@ No, the scope of this plugin is the site frontend only. To display a tour in the
 Check the [premium version of the plugin](https://nasiothemes.com/simple-tour-guide). By upgrading, you will get additional options, as well as access to priority support and updates.
 
 == Changelog ==
+
+= 1.1.8 - November 2025 =
+* Update docs.
 
 = 1.1.7 - November 2025 =
 * Enable [stg_kef] shortcode to work inside php templates.
