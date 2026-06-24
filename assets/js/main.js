@@ -76,6 +76,7 @@
             }
         },
         confirmCancel: isConfirmCancel,
+        confirmCancelMessage: strings.confirmCancel,
     });
 
     // collect step data dynamically in a step object and append the step object to the tour array

@@ -3,7 +3,7 @@
  * Plugin Name: Simple Tour Guide
  * Plugin URI: https://github.com/yonkov/Simple-Tour-Guide
  * Description: Simple Tour Guide is a lightweight step-by-step user guide based on Shepherd.js that provides an easy way to indroduce users to your product or service - by guiding them visually to different elements on your app. Create, edit or delete steps directly from the WordPress admin and show them to your visitors to boost user experience.
- * Version: 1.1.9
+ * Version: 1.2.0
  * Author: Atanas Yonkov
  * Author URI: https://yonkov.github.io/
  * Tags: user-onboarding, tour, introduction, walkthrough, shepherd
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Woof Woof Woof!' );
 }
 
-define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.1.9' );
+define( 'SIMPLE_TOUR_GUIDE_VERSION', '1.2.0' );
 define( 'SIMPLE_TOUR_GUIDE_HOMEPAGE_URL', 'https://nasiothemes.com/simple-tour-guide' );
 define( 'SIMPLE_TOUR_GUIDE_PREMIUM_OPTIONS_URL', 'https://nasiothemes.com/simple-tour-guide#features' );
 define( 'SIMPLE_TOUR_GUIDE_VIDEO_URL', 'https://www.youtube.com/watch?v=TRHfuENMbzk&list=PLwt3CDXFPqtCu5GE5n12Q33hHHEEF2eTa' );
@@ -67,10 +67,11 @@ function simple_tour_guide_localize_script() {
 		'is_logged_in'  => is_user_logged_in(),
 		'has_tour'      => $has_tour,
 		'strings'       => array(
-			'close'  => __( 'Close', 'simple-tour-guide' ),
-			'back'   => __( 'Back', 'simple-tour-guide' ),
-			'next'   => __( 'Next', 'simple-tour-guide' ),
-			'finish' => __( 'Finish', 'simple-tour-guide' ),
+			'close'         => __( 'Close', 'simple-tour-guide' ),
+			'back'          => __( 'Back', 'simple-tour-guide' ),
+			'next'          => __( 'Next', 'simple-tour-guide' ),
+			'finish'        => __( 'Finish', 'simple-tour-guide' ),
+			'confirmCancel' => __( 'Are you sure you want to stop the tour?', 'simple-tour-guide' ),
 		),
 	);
 	wp_localize_script( 'simple-tour-guide', 'scriptParams', $script_params );
